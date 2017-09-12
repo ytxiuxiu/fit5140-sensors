@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		658F51231F67970100266768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51221F67970100266768 /* AppDelegate.swift */; };
-		658F51251F67970100266768 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51241F67970100266768 /* ViewController.swift */; };
+		658F51251F67970100266768 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51241F67970100266768 /* MainViewController.swift */; };
 		658F51281F67970100266768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658F51261F67970100266768 /* Main.storyboard */; };
 		658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 658F51291F67970100266768 /* raspberry_and_sensors.xcdatamodeld */; };
 		658F512D1F67970100266768 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 658F512C1F67970100266768 /* Assets.xcassets */; };
 		658F51301F67970100266768 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658F512E1F67970100266768 /* LaunchScreen.storyboard */; };
 		658F513B1F67970100266768 /* raspberry_and_sensorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F513A1F67970100266768 /* raspberry_and_sensorsTests.swift */; };
+		65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917ADC1F67ADF3003FF669 /* MQTT.swift */; };
+		65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */; };
+		65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */; };
+		65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */; };
+		65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */; };
+		65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* PressureSensor.swift */; };
+		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,9 +34,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072C01304176A3A1F92D761D /* Pods-raspberry-and-sensors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.release.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.release.xcconfig"; sourceTree = "<group>"; };
+		235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_raspberry_and_sensors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		658F511F1F67970100266768 /* raspberry-and-sensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "raspberry-and-sensors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658F51221F67970100266768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		658F51241F67970100266768 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		658F51241F67970100266768 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		658F51271F67970100266768 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		658F512A1F67970100266768 /* raspberry_and_sensors.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = raspberry_and_sensors.xcdatamodel; sourceTree = "<group>"; };
 		658F512C1F67970100266768 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +47,13 @@
 		658F51361F67970100266768 /* raspberry-and-sensorsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "raspberry-and-sensorsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658F513A1F67970100266768 /* raspberry_and_sensorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = raspberry_and_sensorsTests.swift; sourceTree = "<group>"; };
 		658F513C1F67970100266768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65917ADC1F67ADF3003FF669 /* MQTT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MQTT.swift; path = Utils/MQTT.swift; sourceTree = "<group>"; };
+		65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataClass.swift"; path = "Entities/Colour+CoreDataClass.swift"; sourceTree = "<group>"; };
+		65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataProperties.swift"; path = "Entities/Colour+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataClass.swift"; path = "Entities/Pressure+CoreDataClass.swift"; sourceTree = "<group>"; };
+		65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataProperties.swift"; path = "Entities/Pressure+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		65917AE81F67CCA1003FF669 /* PressureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressureSensor.swift; sourceTree = "<group>"; };
+		E6CBDD5D77830D918CA657FE /* Pods-raspberry-and-sensors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.debug.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +81,8 @@
 				658F51211F67970100266768 /* raspberry-and-sensors */,
 				658F51391F67970100266768 /* raspberry-and-sensorsTests */,
 				658F51201F67970100266768 /* Products */,
+				E24A235ABB9CD6D09FEFB60D /* Pods */,
+				8460D032A4E2E15471676AC8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,8 +98,11 @@
 		658F51211F67970100266768 /* raspberry-and-sensors */ = {
 			isa = PBXGroup;
 			children = (
+				65917AEA1F67E297003FF669 /* Settings */,
+				65917ADF1F67C7A6003FF669 /* Entities */,
+				65917ADE1F67ADF7003FF669 /* Utils */,
 				658F51221F67970100266768 /* AppDelegate.swift */,
-				658F51241F67970100266768 /* ViewController.swift */,
+				658F51241F67970100266768 /* MainViewController.swift */,
 				658F51261F67970100266768 /* Main.storyboard */,
 				658F512C1F67970100266768 /* Assets.xcassets */,
 				658F512E1F67970100266768 /* LaunchScreen.storyboard */,
@@ -99,6 +121,50 @@
 			path = "raspberry-and-sensorsTests";
 			sourceTree = "<group>";
 		};
+		65917ADE1F67ADF7003FF669 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				65917ADC1F67ADF3003FF669 /* MQTT.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		65917ADF1F67C7A6003FF669 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */,
+				65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */,
+				65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */,
+				65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */,
+				65917AE81F67CCA1003FF669 /* PressureSensor.swift */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		65917AEA1F67E297003FF669 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		8460D032A4E2E15471676AC8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E24A235ABB9CD6D09FEFB60D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E6CBDD5D77830D918CA657FE /* Pods-raspberry-and-sensors.debug.xcconfig */,
+				072C01304176A3A1F92D761D /* Pods-raspberry-and-sensors.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 658F513F1F67970100266768 /* Build configuration list for PBXNativeTarget "raspberry-and-sensors" */;
 			buildPhases = (
+				A73F8C1A617EC98139A60BFA /* [CP] Check Pods Manifest.lock */,
 				658F511B1F67970100266768 /* Sources */,
 				658F511C1F67970100266768 /* Frameworks */,
 				658F511D1F67970100266768 /* Resources */,
+				CDE4BC5E99BEA04F537B09B9 /* [CP] Embed Pods Frameworks */,
+				15E58B3C0ECEC019706E5882 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,14 +268,78 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		15E58B3C0ECEC019706E5882 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A73F8C1A617EC98139A60BFA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-raspberry-and-sensors-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDE4BC5E99BEA04F537B09B9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		658F511B1F67970100266768 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				658F51251F67970100266768 /* ViewController.swift in Sources */,
+				65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */,
+				658F51251F67970100266768 /* MainViewController.swift in Sources */,
+				65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */,
+				65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */,
 				658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */,
 				658F51231F67970100266768 /* AppDelegate.swift in Sources */,
+				65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */,
+				65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */,
+				65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +478,7 @@
 		};
 		658F51401F67970100266768 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6CBDD5D77830D918CA657FE /* Pods-raspberry-and-sensors.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DPWDASQ472;
@@ -359,6 +493,7 @@
 		};
 		658F51411F67970100266768 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 072C01304176A3A1F92D761D /* Pods-raspberry-and-sensors.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DPWDASQ472;
@@ -420,6 +555,7 @@
 				658F51411F67970100266768 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		658F51421F67970100266768 /* Build configuration list for PBXNativeTarget "raspberry-and-sensorsTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +564,7 @@
 				658F51441F67970100266768 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
