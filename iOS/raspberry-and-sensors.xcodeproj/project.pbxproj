@@ -20,6 +20,7 @@
 		65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */; };
 		65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* PressureSensor.swift */; };
+		65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AED1F67FAEC003FF669 /* PressureViewController.swift */; };
 		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataClass.swift"; path = "Entities/Pressure+CoreDataClass.swift"; sourceTree = "<group>"; };
 		65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataProperties.swift"; path = "Entities/Pressure+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		65917AE81F67CCA1003FF669 /* PressureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressureSensor.swift; sourceTree = "<group>"; };
+		65917AED1F67FAEC003FF669 /* PressureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PressureViewController.swift; path = Pressure/PressureViewController.swift; sourceTree = "<group>"; };
 		E6CBDD5D77830D918CA657FE /* Pods-raspberry-and-sensors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.debug.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,8 @@
 		658F51211F67970100266768 /* raspberry-and-sensors */ = {
 			isa = PBXGroup;
 			children = (
+				65917AEC1F67FAC2003FF669 /* Colour */,
+				65917AEB1F67FAB5003FF669 /* Pressure */,
 				65917AEA1F67E297003FF669 /* Settings */,
 				65917ADF1F67C7A6003FF669 /* Entities */,
 				65917ADE1F67ADF7003FF669 /* Utils */,
@@ -146,6 +150,21 @@
 			children = (
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		65917AEB1F67FAB5003FF669 /* Pressure */ = {
+			isa = PBXGroup;
+			children = (
+				65917AED1F67FAEC003FF669 /* PressureViewController.swift */,
+			);
+			name = Pressure;
+			sourceTree = "<group>";
+		};
+		65917AEC1F67FAC2003FF669 /* Colour */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Colour;
 			sourceTree = "<group>";
 		};
 		8460D032A4E2E15471676AC8 /* Frameworks */ = {
@@ -336,6 +355,7 @@
 				65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */,
 				65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */,
 				658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */,
+				65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */,
 				658F51231F67970100266768 /* AppDelegate.swift in Sources */,
 				65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */,
 				65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */,
