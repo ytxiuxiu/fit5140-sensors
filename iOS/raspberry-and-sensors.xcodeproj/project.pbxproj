@@ -21,7 +21,7 @@
 		65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* PressureSensor.swift */; };
 		65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AED1F67FAEC003FF669 /* PressureViewController.swift */; };
-		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
+		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
