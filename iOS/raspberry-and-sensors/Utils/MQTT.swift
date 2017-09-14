@@ -20,6 +20,10 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
     var client: CocoaMQTT?
     
+//    var colourMonitors = [String: (pressure: Colour) -> Void]()
+    
+    var pressureCallbacks = [String: (pressure: PressureSensor) -> Void]()
+    
 
     override init() {
         super.init()
@@ -27,10 +31,11 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         print("MQTT init")
         
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
-        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
+        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
+        self.client?.autoReconnect = true
         self.client?.connect()
     }
     
@@ -60,9 +65,13 @@ class MQTT: NSObject, CocoaMQTTDelegate {
                     let barometer = info["barometer"] as! Double
                     let altimeter = info["altimeter"] as! Double
                     
-                    let sensor = PressureSensor(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
+                    let pressure = PressureSensor(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
                     
-                    print(sensor)
+                    print("get pressure")
+                    
+                    for (_, callback) in self.pressureCallbacks {
+                        callback(pressure)
+                    }
                 }
                 
             } catch let error as NSError {
@@ -94,4 +103,20 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         }
     }
     
+    //    func addColourMonitor(key: String, callback: @escaping (_ sensor: ColourSensor) -> Void) {
+    //        self.colourMonitors[key] = callback;
+    //    }
+    //
+    //    func removeColourMonitor(key: String) {
+    //        self.colourMonitors.removeValue(forKey: key)
+    //    }
+    
+    func addPressureMonitor(key: String, callback: @escaping (_ sensor: PressureSensor) -> Void) {
+        self.pressureCallbacks[key] = callback;
+    }
+    
+    func removePressureMonitor(key: String) {
+        self.pressureCallbacks.removeValue(forKey: key)
+    }
+
 }

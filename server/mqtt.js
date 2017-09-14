@@ -13,18 +13,4 @@ const mqtt = require('mqtt');
 
 const client = mqtt.connect('mqtt://localhost');
 
-// client.on('connect', function() {
-  // client.subscribe('presence');
-
-  // setInterval(function() {
-  //   client.publish('presence', 'Hello mqtt');
-  // }, 2000);
-  
-// });
-
 module.exports = client;
-
-// client.on('message', function(topic, message) {
-//   // message is Buffer
-//   console.log(message.toString());
-// });

@@ -12,10 +12,6 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let mqttClient = MQTT.shared.client
-        
-        mqttClient?.autoReconnect = true
     }
 
     override func didReceiveMemoryWarning() {
