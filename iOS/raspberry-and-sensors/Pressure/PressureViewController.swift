@@ -30,32 +30,107 @@ class PressureViewController: UIViewController {
     var temperatureLayer: CAShapeLayer?
     
     let mqtt = MQTT.shared
+    
+    let setting = Setting.shared
 
+    var pressureMin = 30.0
+    
+    var pressureMax = 120.0
+    
+    var altitudeMin = 0.0
+    
+    var altitudeMax = 9000.0
+    
+    var temperatureMin = 223.15
+    
+    var temperatureMax = 323.15
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let pressureMin = 10.0
-        let pressureMax = 200.0
-        let altitudeMin = 0.0
-        let altitudeMax = 9000.0
-        let temperatureMin = -50.0
-        let temperatureMax = 50.0
+        let pressureMinDefault = 30.0
+        let pressureMaxDefault = 120.0
+        let altitudeMinDefault = 0.0
+        let altitudeMaxDefault = 9000.0
+        let temperatureMinDefault = 223.15
+        let temperatureMaxDefault = 323.15
         
+        // convet
+        if setting.pressureUnit == Setting.pressureUnits.hPa {
+            pressureMin = pressureMinDefault.hPa
+            pressureMax = pressureMaxDefault.hPa
+        } else {
+            pressureMin = pressureMinDefault
+            pressureMax = pressureMaxDefault
+        }
+        
+        if setting.altitudeUnit == Setting.altitudeUnits.feet {
+            altitudeMin = altitudeMinDefault.feet
+            altitudeMax = altitudeMaxDefault.feet
+        } else {
+            altitudeMin = altitudeMinDefault
+            altitudeMax = altitudeMaxDefault
+        }
+        
+        if setting.temperatureUnit == Setting.temperatureUnits.c {
+            temperatureMin = temperatureMinDefault.celsius
+            temperatureMax = temperatureMaxDefault.celsius
+            
+        } else if setting.temperatureUnit == Setting.temperatureUnits.f {
+            temperatureMin = temperatureMinDefault.fahrenheit
+            temperatureMax = temperatureMaxDefault.fahrenheit
+        } else {
+            temperatureMin = temperatureMinDefault
+            temperatureMax = temperatureMaxDefault
+        }
+        
+        // draw init
         self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: pressureMin, max: pressureMax, data: pressureMin)
         self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: altitudeMin)
-        self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: 0)
+        self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: temperatureMin)
         
+        listenToSensors()
+
+    }
+    
+    func listenToSensors() {
         self.mqtt.addPressureMonitor(key: "pressureViewController", callback: { (pressure) in
-            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: pressureMin, max: pressureMax, data: pressure.barometer.hPa)
-            self.pressureLabel.text = "\(pressure.barometer.hPa.simplify())Pa"
+            var pressureData = pressure.barometer
+            var altitudeData = pressure.altimeter
+            var temperatureData = pressure.thermometer
             
-            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: pressure.altimeter.meters)
-            self.altitudeLabel.text = "\(pressure.altimeter.meters.simplify())m"
+            if self.setting.pressureUnit == Setting.pressureUnits.hPa {
+                pressureData = pressureData.hPa
+            }
             
-            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: pressure.thermometer.celsius)
-            self.temperatureLabel.text = "\(pressure.thermometer.celsius.simplify())℃"
+            if self.setting.altitudeUnit == Setting.altitudeUnits.feet {
+                altitudeData = altitudeData.feet
+            }
+            
+            if self.setting.temperatureUnit == Setting.temperatureUnits.c {
+                temperatureData = temperatureData.celsius
+                
+            } else if self.setting.temperatureUnit == Setting.temperatureUnits.f {
+                temperatureData = temperatureData.fahrenheit
+            }
+            
+            print(altitudeData)
+            
+            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: pressureData)
+            self.pressureLabel.text = "\(pressureData.simplify())\(self.setting.getPressureUnitSymbol())"
+            
+            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: altitudeData)
+            self.altitudeLabel.text = "\(altitudeData.simplify())\(self.setting.getAltitudeUnitSymbol())"
+            
+            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: temperatureData)
+            self.temperatureLabel.text = "\(temperatureData.simplify())\(self.setting.getTemperatureUnitSymbol())"
         })
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,7 +140,11 @@ class PressureViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         self.mqtt.removePressureMonitor(key: "pressureViewController")
+        pressureLabel.text = "-.-"
+        altitudeLabel.text = "-.-"
+        temperatureLabel.text = "-.-"
     }
     
     func drawDataRing(dataLayer: inout CAShapeLayer?, view: UIView, min: Double, max: Double, data: Double) {

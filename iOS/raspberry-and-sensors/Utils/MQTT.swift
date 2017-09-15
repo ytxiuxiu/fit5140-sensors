@@ -31,7 +31,8 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         print("MQTT init")
         
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
-        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
+//        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
+        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
