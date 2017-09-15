@@ -47,16 +47,14 @@ class PressureViewController: UIViewController {
         self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: 0)
         
         self.mqtt.addPressureMonitor(key: "pressureViewController", callback: { (pressure) in
-            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: pressureMin, max: pressureMax, data: pressure.getPressurePa())
-            self.pressureLabel.text = "\(self.doubleToString(number: pressure.getPressurePa()))Pa"
+            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: pressureMin, max: pressureMax, data: pressure.barometer.hPa)
+            self.pressureLabel.text = "\(pressure.barometer.hPa.simplify())Pa"
             
-            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: pressure.getAltitudeMeters())
-            self.altitudeLabel.text = "\(self.doubleToString(number: pressure.getAltitudeMeters()))m"
+            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: pressure.altimeter.meters)
+            self.altitudeLabel.text = "\(pressure.altimeter.meters.simplify())m"
             
-            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: pressure.getTemperatureCelsius())
-            self.temperatureLabel.text = "\(self.doubleToString(number: pressure.getTemperatureCelsius()))℃"
-            
-            print(pressure)
+            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: pressure.thermometer.celsius)
+            self.temperatureLabel.text = "\(pressure.thermometer.celsius.simplify())℃"
         })
     }
 
@@ -68,10 +66,6 @@ class PressureViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.mqtt.removePressureMonitor(key: "pressureViewController")
-    }
-    
-    func doubleToString(number: Double) -> String {
-        return String(format: "%.1f", number)
     }
     
     func drawDataRing(dataLayer: inout CAShapeLayer?, view: UIView, min: Double, max: Double, data: Double) {

@@ -21,6 +21,13 @@
 		65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* PressureSensor.swift */; };
 		65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AED1F67FAEC003FF669 /* PressureViewController.swift */; };
+		65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */; };
+		65CD76DA1F6BCE9A002EA795 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */; };
+		65CD76DC1F6BE087002EA795 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76DB1F6BE087002EA795 /* UIViewControllerExtension.swift */; };
+		65CD76DE1F6BF8B6002EA795 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76DD1F6BF8B6002EA795 /* UITextFieldExtension.swift */; };
+		65CD76E01F6C0C81002EA795 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76DF1F6C0C81002EA795 /* StringExtension.swift */; };
+		65F172A51F6AAC85000DAE2F /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F172A41F6AAC85000DAE2F /* Setting.swift */; };
+		65F172A91F6ABC2B000DAE2F /* MainSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F172A81F6ABC2B000DAE2F /* MainSettingTableViewController.swift */; };
 		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +62,13 @@
 		65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataProperties.swift"; path = "Entities/Pressure+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		65917AE81F67CCA1003FF669 /* PressureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressureSensor.swift; sourceTree = "<group>"; };
 		65917AED1F67FAEC003FF669 /* PressureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PressureViewController.swift; path = Pressure/PressureViewController.swift; sourceTree = "<group>"; };
+		65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemperatureAlarmSettingTableViewController.swift; path = Settings/TemperatureAlarmSettingTableViewController.swift; sourceTree = "<group>"; };
+		65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Utils/DoubleExtension.swift; sourceTree = "<group>"; };
+		65CD76DB1F6BE087002EA795 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = Utils/UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		65CD76DD1F6BF8B6002EA795 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITextFieldExtension.swift; path = Utils/UITextFieldExtension.swift; sourceTree = "<group>"; };
+		65CD76DF1F6C0C81002EA795 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Utils/StringExtension.swift; sourceTree = "<group>"; };
+		65F172A41F6AAC85000DAE2F /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = Settings/Setting.swift; sourceTree = "<group>"; };
+		65F172A81F6ABC2B000DAE2F /* MainSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSettingTableViewController.swift; path = Settings/MainSettingTableViewController.swift; sourceTree = "<group>"; };
 		E6CBDD5D77830D918CA657FE /* Pods-raspberry-and-sensors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.debug.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				65917ADC1F67ADF3003FF669 /* MQTT.swift */,
+				65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */,
+				65CD76DB1F6BE087002EA795 /* UIViewControllerExtension.swift */,
+				65CD76DD1F6BF8B6002EA795 /* UITextFieldExtension.swift */,
+				65CD76DF1F6C0C81002EA795 /* StringExtension.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -148,6 +166,9 @@
 		65917AEA1F67E297003FF669 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				65F172A81F6ABC2B000DAE2F /* MainSettingTableViewController.swift */,
+				65F172A41F6AAC85000DAE2F /* Setting.swift */,
+				65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -351,14 +372,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */,
+				65F172A91F6ABC2B000DAE2F /* MainSettingTableViewController.swift in Sources */,
+				65CD76DC1F6BE087002EA795 /* UIViewControllerExtension.swift in Sources */,
 				658F51251F67970100266768 /* MainViewController.swift in Sources */,
 				65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */,
+				65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */,
 				65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */,
 				658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */,
+				65CD76E01F6C0C81002EA795 /* StringExtension.swift in Sources */,
 				65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */,
+				65CD76DE1F6BF8B6002EA795 /* UITextFieldExtension.swift in Sources */,
+				65F172A51F6AAC85000DAE2F /* Setting.swift in Sources */,
 				658F51231F67970100266768 /* AppDelegate.swift in Sources */,
 				65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */,
 				65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */,
+				65CD76DA1F6BCE9A002EA795 /* DoubleExtension.swift in Sources */,
 				65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
