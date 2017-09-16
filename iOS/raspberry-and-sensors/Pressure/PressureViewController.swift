@@ -119,7 +119,13 @@ class PressureViewController: UIViewController {
                 temperatureData = temperatureData.fahrenheit
             }
             
-            print(altitudeData)
+            // make sure they are not execeeds the range
+            pressureData = pressureData <= self.pressureMax ? pressureData : self.pressureMax
+            pressureData = pressureData >= self.pressureMin ? pressureData : self.pressureMin
+            altitudeData = altitudeData <= self.altitudeMax ? altitudeData : self.altitudeMax
+            altitudeData = altitudeData >= self.altitudeMin ? altitudeData : self.altitudeMin
+            temperatureData = temperatureData <= self.temperatureMax ? temperatureData : self.temperatureMax
+            temperatureData = temperatureData >= self.temperatureMin ? temperatureData : self.temperatureMin
             
             self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: pressureData)
             self.pressureLabel.text = "\(pressureData.simplify())\(self.setting.getPressureUnitSymbol())"
