@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const mqtt = require('./mqtt');
+const db = require('./db');
 const sensors = require('./sensors');
 const index = require('./routes/index');
 
@@ -14,6 +15,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.set('view engine', 'html');
 
 app.use('/', index);
 
@@ -26,13 +28,11 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({
+    message: err.message,
+    error: req.app.get('env') === 'development' ? err : {}
+  })
 });
 
 // mqtt & sensors
@@ -44,8 +44,17 @@ mqtt.on('connect', () => {
       const data = {
         thermometer: pressure.thermometer.kelvin,
         barometer: pressure.barometer.pressure,
-        altimeter: pressure.altimeter.meters
+        altimeter: pressure.altimeter.meters,
+        time: new Date()
       };
+
+      db.get('pressure').insert(data)
+        .catch((err) => {
+          console.error('Failed to insert sensor data into MongoDB', err);
+        })
+        .then(() => {
+          db.close();
+        });
       mqtt.publish('pressure', JSON.stringify(data));
     });
   });

@@ -11,6 +11,9 @@
 
 const mqtt = require('mqtt');
 
-const client = mqtt.connect('mqtt://localhost');
+const config = require('./config');
+
+
+const client = mqtt.connect(config.mqtt.url);
 
 module.exports = client;
