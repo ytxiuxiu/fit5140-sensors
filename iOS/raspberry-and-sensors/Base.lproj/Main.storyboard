@@ -148,10 +148,10 @@
             </objects>
             <point key="canvasLocation" x="2424.8000000000002" y="69.715142428785612"/>
         </scene>
-        <!--View Controller-->
+        <!--History-->
         <scene sceneID="g2F-o7-TU9">
             <objects>
-                <viewController id="DSv-mw-0BS" sceneMemberID="viewController">
+                <viewController title="History" id="DSv-mw-0BS" customClass="PressureHistoryViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AJ6-XA-jPM"/>
                         <viewControllerLayoutGuide type="bottom" id="Jpg-45-ZFR"/>
@@ -159,12 +159,69 @@
                     <view key="view" contentMode="scaleToFill" id="jHz-JT-GRT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-no-SoF">
+                                <rect key="frame" x="14" y="580" width="300" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="DSv-mw-0BS" eventType="valueChanged" id="pTX-Kp-Xnp"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQ9-L4-P6l">
+                                <rect key="frame" x="320" y="584.5" width="39" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="fbB-8P-ndu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZt-45-3Sj" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="108" width="343" height="464"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oxS-Dd-adN">
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Pressure"/>
+                                    <segment title="Altitude"/>
+                                    <segment title="Temperature"/>
+                                </segments>
+                                <connections>
+                                    <action selector="dataSegmentChanged:" destination="DSv-mw-0BS" eventType="valueChanged" id="U3k-ye-ky9"/>
+                                </connections>
+                            </segmentedControl>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="i2l-di-M0t">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="RcC-GB-qXv"/>
+                                    <constraint firstAttribute="height" constant="20" id="swe-m1-mFI"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OQ9-L4-P6l" firstAttribute="centerY" secondItem="BV6-no-SoF" secondAttribute="centerY" id="6Lh-dW-JXC"/>
+                            <constraint firstItem="i2l-di-M0t" firstAttribute="centerX" secondItem="jHz-JT-GRT" secondAttribute="centerX" id="T0I-wW-Mm0"/>
+                            <constraint firstItem="OQ9-L4-P6l" firstAttribute="leading" secondItem="BV6-no-SoF" secondAttribute="trailing" constant="8" id="U7V-Qo-zek"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OQ9-L4-P6l" secondAttribute="trailing" id="ZnE-uU-ztD"/>
+                            <constraint firstItem="BV6-no-SoF" firstAttribute="leading" secondItem="jHz-JT-GRT" secondAttribute="leadingMargin" id="lR5-yh-Rcm"/>
+                            <constraint firstItem="i2l-di-M0t" firstAttribute="centerY" secondItem="jHz-JT-GRT" secondAttribute="centerY" id="sfY-3y-lr5"/>
+                            <constraint firstItem="Jpg-45-ZFR" firstAttribute="top" secondItem="BV6-no-SoF" secondAttribute="bottom" constant="8" id="tVQ-Xy-uaO"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="i2l-di-M0t" id="f67-zo-hl5"/>
+                        <outlet property="chartView" destination="KZt-45-3Sj" id="Pbj-t3-YzY"/>
+                        <outlet property="dataSegment" destination="oxS-Dd-adN" id="dBH-TS-jVV"/>
+                        <outlet property="slider" destination="BV6-no-SoF" id="N93-m7-W6s"/>
+                        <outlet property="sliderLabel" destination="OQ9-L4-P6l" id="WsB-uD-C0g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYF-hk-z18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3258" y="70"/>
+            <point key="canvasLocation" x="3256.8000000000002" y="69.715142428785612"/>
         </scene>
         <!--Colour-->
         <scene sceneID="Gwr-Cd-J1I">
@@ -227,7 +284,7 @@
         <scene sceneID="HXd-0D-N4K">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xxU-mm-5f8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Pressure" id="uDn-0C-Vxa"/>
+                    <tabBarItem key="tabBarItem" title="Pressure" image="meter" id="uDn-0C-Vxa"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ddq-t9-SyS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -813,7 +870,7 @@
         <scene sceneID="cpR-sf-KS4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PGj-AG-KNj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="TQy-zt-iig"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="TQy-zt-iig"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y7k-hv-JeU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -829,4 +886,8 @@
             <point key="canvasLocation" x="1486" y="1581"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="meter" width="32" height="32"/>
+        <image name="settings" width="32" height="32"/>
+    </resources>
 </document>

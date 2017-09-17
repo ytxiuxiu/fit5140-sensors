@@ -8,15 +8,20 @@ const router = express.Router();
 
 const db = require('../db');
 
-router.get('/sensors/pressure/:n', (req, res, next) => {
-  const n = parseInt(req.params.n);
+router.get('/history/:sensor/:value/:skip/:limit', (req, res, next) => {
+  const fields = { time: 1 };
+  fields[req.params.value] = 1;
+  const skip = parseInt(req.params.skip);
+  const limit = parseInt(req.params.limit);
 
-  db.get('pressure').find({}, { 
+  db.get(req.params.sensor).find({}, { 
+    fields,
     sort: { time: -1 },
-    limit: n
+    skip,
+    limit
   })
   .then((docs) => {
-    res.json(docs);
+    res.json(docs.reverse());
   })
   .catch((err) => {
     next(err);

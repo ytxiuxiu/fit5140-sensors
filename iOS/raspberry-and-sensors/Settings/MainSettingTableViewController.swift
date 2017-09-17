@@ -16,6 +16,18 @@ class MainSettingTableViewController: UITableViewController {
     
     @IBOutlet weak var altitudeUnitSegment: UISegmentedControl!
     
+    let temperatureUnitToSegmentSelection = [Setting.temperatureUnits.c: 0, Setting.temperatureUnits.f: 1, Setting.temperatureUnits.k: 2]
+    
+    let temperatureSegmentSelectionToUnit = [Setting.temperatureUnits.c, Setting.temperatureUnits.f, Setting.temperatureUnits.k]
+    
+    let pressureUnitToSegmentSelection = [Setting.pressureUnits.hPa: 0, Setting.pressureUnits.kPa: 1]
+    
+    let pressureSegmentSelectionToUnit = [Setting.pressureUnits.hPa, Setting.pressureUnits.kPa]
+    
+    let altitudeUnitToSegmentSelection = [Setting.altitudeUnits.m: 0, Setting.altitudeUnits.feet: 1]
+    
+    let altitudeSegmentSelectionToUnit = [Setting.altitudeUnits.m, Setting.altitudeUnits.feet]
+    
     
     let setting = Setting.shared
     
@@ -42,25 +54,9 @@ class MainSettingTableViewController: UITableViewController {
     }
     
     func updateSetting() {
-        if setting.temperatureUnit == Setting.temperatureUnits.c {
-            temperatureUnitSegment.selectedSegmentIndex = 0
-        } else if setting.temperatureUnit == Setting.temperatureUnits.f {
-            temperatureUnitSegment.selectedSegmentIndex = 1
-        } else if setting.temperatureUnit == Setting.temperatureUnits.k {
-            temperatureUnitSegment.selectedSegmentIndex = 2
-        }
-        
-        if setting.pressureUnit == Setting.pressureUnits.hPa {
-            pressureUnitSegment.selectedSegmentIndex = 0
-        } else if setting.pressureUnit == Setting.pressureUnits.kPa {
-            pressureUnitSegment.selectedSegmentIndex = 1
-        }
-        
-        if setting.altitudeUnit == Setting.altitudeUnits.m {
-            altitudeUnitSegment.selectedSegmentIndex = 0
-        } else if setting.altitudeUnit == Setting.altitudeUnits.feet {
-            altitudeUnitSegment.selectedSegmentIndex = 1
-        }
+        temperatureUnitSegment.selectedSegmentIndex = temperatureUnitToSegmentSelection[setting.temperatureUnit]!
+        pressureUnitSegment.selectedSegmentIndex = pressureUnitToSegmentSelection[setting.pressureUnit]!
+        altitudeUnitSegment.selectedSegmentIndex = altitudeUnitToSegmentSelection[setting.altitudeUnit]!
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,32 +64,22 @@ class MainSettingTableViewController: UITableViewController {
     }
     
     @IBAction func temperatureUnitChanged(_ sender: Any) {
+        
+        // StackOverflow: ios - Array from dictionary keys in swift - Stack Overflow
+        //      https://stackoverflow.com/questions/26386093/array-from-dictionary-keys-in-swift
+        
         let selected = temperatureUnitSegment.selectedSegmentIndex
-        if selected == 0 {
-            setting.temperatureUnit = Setting.temperatureUnits.c
-        } else if selected == 1 {
-            setting.temperatureUnit = Setting.temperatureUnits.f
-        } else if selected == 2 {
-            setting.temperatureUnit = Setting.temperatureUnits.k
-        }
+        setting.temperatureUnit = temperatureSegmentSelectionToUnit[selected]
     }
     
     @IBAction func pressureUnitChanged(_ sender: Any) {
         let selected = pressureUnitSegment.selectedSegmentIndex
-        if selected == 0 {
-            setting.pressureUnit = Setting.pressureUnits.hPa
-        } else if selected == 1 {
-            setting.pressureUnit = Setting.pressureUnits.kPa
-        }
+        setting.pressureUnit = pressureSegmentSelectionToUnit[selected]
     }
     
     @IBAction func altitudeUnitChanged(_ sender: Any) {
         let selected = altitudeUnitSegment.selectedSegmentIndex
-        if selected == 0 {
-            setting.altitudeUnit = Setting.altitudeUnits.m
-        } else if selected == 1 {
-            setting.altitudeUnit = Setting.altitudeUnits.feet
-        }
+        setting.altitudeUnit = altitudeSegmentSelectionToUnit[selected]
     }
 
 }

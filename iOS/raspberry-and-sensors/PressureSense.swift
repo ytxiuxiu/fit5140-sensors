@@ -8,14 +8,19 @@
 
 import UIKit
 
-class PressureSensor: NSObject {
+class PressureSense: NSObject {
     
-    var thermometer: Double
+    static let values = (thermometer: "thermometer", barometer: "barometer", altimeter: "altimeter")
     
-    var barometer: Double
+    var thermometer: Double?
     
-    var altimeter: Double
+    var barometer: Double?
     
+    var altimeter: Double?
+    
+    override init() {
+        
+    }
     
     init(thermometer: Double, barometer: Double, altimeter: Double) {
         self.thermometer = thermometer
@@ -24,7 +29,7 @@ class PressureSensor: NSObject {
     }
     
     override var description: String {
-        return "PressureSensor [thermometer=\(self.thermometer), barometer=\(self.barometer), altimeter=\(self.altimeter)]"
+        return "PressureSensor [thermometer=\(self.thermometer?.simplify() ?? ""), barometer=\(self.barometer?.simplify() ?? ""), altimeter=\(self.altimeter?.simplify() ?? "")]"
     }
     
 }

@@ -23,6 +23,8 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
     
     let setting = Setting.shared
     
+    let alarm = Alarm.shared
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,26 +35,16 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //updateSetting()
+        // pause the alarm
+        alarm.pauseTemperatureAlarm = true
     }
     
     func updateSetting() {
         temperatureAlarmOnSwitch.setOn(setting.temperatureAlarmOn, animated: false)
         
         // convert to the user setting unit
-        if setting.temperatureUnit == Setting.temperatureUnits.c {
-            higherThanField.text = setting.temperatureAlarmHigherThan?.celsius.simplify()
-            lowerThanField.text = setting.temperatureAlarmLowerThan?.celsius.simplify()
-            
-        } else if setting.temperatureUnit == Setting.temperatureUnits.f {
-            higherThanField.text = setting.temperatureAlarmHigherThan?.fahrenheit.simplify()
-            lowerThanField.text = setting.temperatureAlarmLowerThan?.fahrenheit.simplify()
-            
-        } else if setting.temperatureUnit == Setting.temperatureUnits.k {
-            higherThanField.text = setting.temperatureAlarmHigherThan?.simplify()
-            lowerThanField.text = setting.temperatureAlarmLowerThan?.simplify()
-        }
-        
+        higherThanField.text = setting.temperatureAlarmHigherThan?.toCurrentTemperatureUnit().simplify()
+        lowerThanField.text = setting.temperatureAlarmLowerThan?.toCurrentTemperatureUnit().simplify()
         
         higherThanUnitLabel.text = setting.getTemperatureUnitSymbol()
         lowerThanUnitLabel.text = setting.getTemperatureUnitSymbol()
@@ -69,6 +61,11 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         
         setting.save()
+        
+        // reset alarm
+        alarm.temperatureHigherThanTriggered = false
+        alarm.temperatureLowerThanTriggered = false
+        alarm.pauseTemperatureAlarm = false
     }
     
     func updateEnabled() {

@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.0.2):
+    - Charts/Core (= 3.0.2)
+  - Charts/Core (3.0.2)
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
@@ -6,15 +9,20 @@ PODS:
     - CocoaAsyncSocket (~> 7.5.1)
     - SwiftyTimer (~> 2.0.0)
   - SwiftyTimer (2.0.0)
+  - Whisper (5.0.0)
 
 DEPENDENCIES:
+  - Charts
   - CocoaMQTT
+  - Whisper
 
 SPEC CHECKSUMS:
+  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaMQTT: 014fd1f0793d376b207073ebb5b92a0c8bf8eb2e
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
+  Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 14a4ed8c75a0a37948ea6c5c80ca4320cb437480
+PODFILE CHECKSUM: c24e797d0713a6d04e147608b577f0e3baa53827
 
 COCOAPODS: 1.3.0

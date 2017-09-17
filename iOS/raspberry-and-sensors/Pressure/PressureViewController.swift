@@ -61,33 +61,14 @@ class PressureViewController: UIViewController {
         let temperatureMaxDefault = 323.15
         
         // convet
-        if setting.pressureUnit == Setting.pressureUnits.hPa {
-            pressureMin = pressureMinDefault.hPa
-            pressureMax = pressureMaxDefault.hPa
-        } else {
-            pressureMin = pressureMinDefault
-            pressureMax = pressureMaxDefault
-        }
-        
-        if setting.altitudeUnit == Setting.altitudeUnits.feet {
-            altitudeMin = altitudeMinDefault.feet
-            altitudeMax = altitudeMaxDefault.feet
-        } else {
-            altitudeMin = altitudeMinDefault
-            altitudeMax = altitudeMaxDefault
-        }
-        
-        if setting.temperatureUnit == Setting.temperatureUnits.c {
-            temperatureMin = temperatureMinDefault.celsius
-            temperatureMax = temperatureMaxDefault.celsius
-            
-        } else if setting.temperatureUnit == Setting.temperatureUnits.f {
-            temperatureMin = temperatureMinDefault.fahrenheit
-            temperatureMax = temperatureMaxDefault.fahrenheit
-        } else {
-            temperatureMin = temperatureMinDefault
-            temperatureMax = temperatureMaxDefault
-        }
+        pressureMin = pressureMinDefault.toCurrentPressureUnit()
+        pressureMax = pressureMaxDefault.toCurrentPressureUnit()
+
+        altitudeMin = altitudeMinDefault.toCurrentAltitudeUnit()
+        altitudeMax = altitudeMaxDefault.toCurrentAltitudeUnit()
+
+        temperatureMin = temperatureMinDefault.toCurrentTemperatureUnit()
+        temperatureMax = temperatureMaxDefault.toCurrentTemperatureUnit()
         
         // draw init
         self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: pressureMin, max: pressureMax, data: pressureMin)
@@ -99,42 +80,37 @@ class PressureViewController: UIViewController {
     }
     
     func listenToSensors() {
-        self.mqtt.addPressureMonitor(key: "pressureViewController", callback: { (pressure) in
-            var pressureData = pressure.barometer
-            var altitudeData = pressure.altimeter
-            var temperatureData = pressure.thermometer
-            
-            if self.setting.pressureUnit == Setting.pressureUnits.hPa {
-                pressureData = pressureData.hPa
-            }
-            
-            if self.setting.altitudeUnit == Setting.altitudeUnits.feet {
-                altitudeData = altitudeData.feet
-            }
-            
-            if self.setting.temperatureUnit == Setting.temperatureUnits.c {
-                temperatureData = temperatureData.celsius
+        self.mqtt.addPressureMonitor(key: "pressureViewController", callback: { (sensor) in
+            if let pressure = sensor.barometer {
+                var pressureData = pressure.toCurrentPressureUnit()
                 
-            } else if self.setting.temperatureUnit == Setting.temperatureUnits.f {
-                temperatureData = temperatureData.fahrenheit
+                // make sure they are not execeeds the range
+                pressureData = pressureData <= self.pressureMax ? pressureData : self.pressureMax
+                pressureData = pressureData >= self.pressureMin ? pressureData : self.pressureMin
+                
+                self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: pressureData)
+                self.pressureLabel.text = "\(pressureData.simplify())\(self.setting.getPressureUnitSymbol())"
             }
             
-            // make sure they are not execeeds the range
-            pressureData = pressureData <= self.pressureMax ? pressureData : self.pressureMax
-            pressureData = pressureData >= self.pressureMin ? pressureData : self.pressureMin
-            altitudeData = altitudeData <= self.altitudeMax ? altitudeData : self.altitudeMax
-            altitudeData = altitudeData >= self.altitudeMin ? altitudeData : self.altitudeMin
-            temperatureData = temperatureData <= self.temperatureMax ? temperatureData : self.temperatureMax
-            temperatureData = temperatureData >= self.temperatureMin ? temperatureData : self.temperatureMin
+            if let altitude = sensor.altimeter {
+                var altitudeData = altitude.toCurrentAltitudeUnit()
+                
+                altitudeData = altitudeData <= self.altitudeMax ? altitudeData : self.altitudeMax
+                altitudeData = altitudeData >= self.altitudeMin ? altitudeData : self.altitudeMin
+
+                self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: altitudeData)
+                self.altitudeLabel.text = "\(altitudeData.simplify())\(self.setting.getAltitudeUnitSymbol())"
+            }
             
-            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: pressureData)
-            self.pressureLabel.text = "\(pressureData.simplify())\(self.setting.getPressureUnitSymbol())"
-            
-            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: altitudeData)
-            self.altitudeLabel.text = "\(altitudeData.simplify())\(self.setting.getAltitudeUnitSymbol())"
-            
-            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: temperatureData)
-            self.temperatureLabel.text = "\(temperatureData.simplify())\(self.setting.getTemperatureUnitSymbol())"
+            if let temperature = sensor.thermometer {
+                var temperatureData = temperature.toCurrentTemperatureUnit()
+                
+                temperatureData = temperatureData <= self.temperatureMax ? temperatureData : self.temperatureMax
+                temperatureData = temperatureData >= self.temperatureMin ? temperatureData : self.temperatureMin
+                
+                self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: temperatureData)
+                self.temperatureLabel.text = "\(temperatureData.simplify())\(self.setting.getTemperatureUnitSymbol())"
+            }
         })
 
     }

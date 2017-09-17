@@ -14,6 +14,18 @@ extension Double {
         return String(format: "%.1f", self)
     }
     
+    func toCurrentTemperatureUnit() -> Double {
+        let setting = Setting.shared
+        
+        if setting.temperatureUnit == Setting.temperatureUnits.c {
+            return self.celsius
+        } else if setting.temperatureUnit == Setting.temperatureUnits.f {
+            return self.fahrenheit
+        } else {
+            return self
+        }
+    }
+    
     var celsius: Double {
         get {
             // Website: Kelvin to Celsius formula
@@ -40,6 +52,16 @@ extension Double {
         return (self + 459.67) * 5 / 9
     }
     
+    func toCurrentPressureUnit() -> Double {
+        let setting = Setting.shared
+        
+        if setting.pressureUnit == Setting.pressureUnits.hPa {
+            return self.hPa
+        } else {
+            return self
+        }
+    }
+    
     var kPa: Double {
         get {
             return self
@@ -54,6 +76,16 @@ extension Double {
     
     func hPaToKPa() -> Double {
         return self / 10
+    }
+    
+    func toCurrentAltitudeUnit() -> Double {
+        let setting = Setting.shared
+        
+        if setting.altitudeUnit == Setting.altitudeUnits.feet {
+            return self.feet
+        } else {
+            return self
+        }
     }
     
     var meters: Double {

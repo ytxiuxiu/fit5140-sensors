@@ -35,6 +35,12 @@ app.use((err, req, res, next) => {
   })
 });
 
+// only keep data for 24 hours
+//
+// Website: Expire Data from Collections by Setting TTL
+//    https://docs.mongodb.com/manual/tutorial/expire-data/
+db.get('pressure').createIndex({ time: 1 }, { expireAfterSeconds: 3600 * 24 });
+
 // mqtt & sensors
 mqtt.on('connect', () => {
 
