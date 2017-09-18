@@ -705,7 +705,7 @@
         <!--Pressure Alarm-->
         <scene sceneID="TK0-6I-OWj">
             <objects>
-                <tableViewController title="Pressure Alarm" id="SC9-PX-XIF" sceneMemberID="viewController">
+                <tableViewController title="Pressure Alarm" id="SC9-PX-XIF" customClass="PressureAlarmSettingTableViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="cYI-zi-PEP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -730,6 +730,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mtc-Su-ZTN">
                                                     <rect key="frame" x="318" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="pressureAlarmOnChanged:" destination="SC9-PX-XIF" eventType="valueChanged" id="LXN-v1-ITI"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -768,6 +771,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="lowerThanChanged:" destination="SC9-PX-XIF" eventType="editingChanged" id="QHb-eF-pgw"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -788,6 +794,11 @@
                             <outlet property="delegate" destination="SC9-PX-XIF" id="lxN-Ju-GpK"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="lowerThanField" destination="v4y-n7-BSh" id="tdt-uO-Kvt"/>
+                        <outlet property="lowerThanUnitLabel" destination="ht1-wk-6na" id="vut-QS-uV8"/>
+                        <outlet property="pressureAlarmOnSwitch" destination="Mtc-Su-ZTN" id="4nY-51-4so"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMO-RV-OHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -796,7 +807,7 @@
         <!--Altitude Alarm-->
         <scene sceneID="dvp-S0-3JG">
             <objects>
-                <tableViewController title="Altitude Alarm" id="YJj-uk-pf3" sceneMemberID="viewController">
+                <tableViewController title="Altitude Alarm" id="YJj-uk-pf3" customClass="AltitudeAlarmSettingTableViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="zp5-Al-1jb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -820,6 +831,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqx-65-CFh">
                                                     <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="altitudeAlarmOnChanged:" destination="YJj-uk-pf3" eventType="valueChanged" id="972-rb-j9Y"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -860,6 +874,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="higherThanChanged:" destination="YJj-uk-pf3" eventType="editingChanged" id="U8g-Ii-aGw"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -880,6 +897,11 @@
                             <outlet property="delegate" destination="YJj-uk-pf3" id="fFs-bQ-Qle"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="altitudeAlarmOnSwitch" destination="cqx-65-CFh" id="LTj-ZY-CL5"/>
+                        <outlet property="higherThanField" destination="u6j-vW-2yW" id="G2T-Vf-GpJ"/>
+                        <outlet property="higherThanUnitLabel" destination="3dr-OZ-E8b" id="Df1-Sb-sVx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MlM-6w-OXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

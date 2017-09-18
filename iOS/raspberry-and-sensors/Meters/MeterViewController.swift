@@ -142,7 +142,7 @@ class MeterViewController: UIViewController {
     }
     
     func listenToSensors() {
-        self.mqtt.addPressureMonitor(key: "pressureViewController", callback: { (sensor) in
+        self.mqtt.addMeterMonitor(key: "meterViewController", callback: { (sensor) in
             if let pressure = sensor.barometer {
                 let pressureData = self.processPressureData(pressure: pressure)
                 self.showPressure(data: pressureData)
@@ -174,7 +174,7 @@ class MeterViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.mqtt.removePressureMonitor(key: "pressureViewController")
+        self.mqtt.removeMeterMonitor(key: "meterViewController")
         pressureLabel.text = "-.-"
         altitudeLabel.text = "-.-"
         temperatureLabel.text = "-.-"

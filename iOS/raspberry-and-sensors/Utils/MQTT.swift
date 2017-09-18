@@ -22,7 +22,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
 //    var colourMonitors = [String: (pressure: Colour) -> Void]()
     
-    var pressureCallbacks = [String: (sense: MeterSense) -> Void]()
+    var meterCallbacks = [String: (sense: MeterSense) -> Void]()
     
 
     override init() {
@@ -68,7 +68,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
                     
                     let pressure = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
 
-                    for (_, callback) in self.pressureCallbacks {
+                    for (_, callback) in self.meterCallbacks {
                         callback(pressure)
                     }
                 }
@@ -110,12 +110,12 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     //        self.colourMonitors.removeValue(forKey: key)
     //    }
     
-    func addPressureMonitor(key: String, callback: @escaping (_ sensor: MeterSense) -> Void) {
-        self.pressureCallbacks[key] = callback;
+    func addMeterMonitor(key: String, callback: @escaping (_ sensor: MeterSense) -> Void) {
+        self.meterCallbacks[key] = callback;
     }
     
-    func removePressureMonitor(key: String) {
-        self.pressureCallbacks.removeValue(forKey: key)
+    func removeMeterMonitor(key: String) {
+        self.meterCallbacks.removeValue(forKey: key)
     }
 
 }

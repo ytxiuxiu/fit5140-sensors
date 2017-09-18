@@ -20,7 +20,15 @@ class Alarm: NSObject {
     
     var temperatureLowerThanTriggered = false
     
+    var altitudeHigherThanTriggered = false
+    
+    var pressureLowerThanTriggered = false
+    
     var pauseTemperatureAlarm = false
+    
+    var pauseAltitudeAlarm = false
+    
+    var pausePressureAlarm = false
     
     let identifiers = (temperatureAlarm: "temperatureAlarm", pressureAlarm: "pressureAlarm", altitudeAlarm: "altitudeAlarm")
     
@@ -33,13 +41,15 @@ class Alarm: NSObject {
                 return
             }
         
-            self.monitorPressure()
+            self.monitorMeters()
         })
     }
     
-    func monitorPressure() {
-        MQTT.shared.addPressureMonitor(key: "alarm") { (sense) in
+    func monitorMeters() {
+        MQTT.shared.addMeterMonitor(key: "alarm") { (sense) in
             self.monitorTemperature(sense: sense)
+            self.monitorAltitude(sense: sense)
+            self.monitorPressure(sense: sense)
         }
     }
     
@@ -76,9 +86,55 @@ class Alarm: NSObject {
                     }
                     self.temperatureLowerThanTriggered = true
                     
-                } else if sense.thermometer! > temperatureAlarmLowerThan + 1 {
+                } else if sense.thermometer! > temperatureAlarmLowerThan + 1 {  // 1℃
                     // discard the alarm
                     self.temperatureLowerThanTriggered = false
+                }
+            }
+        }
+    }
+    
+    func monitorAltitude(sense: MeterSense) {
+        if self.setting.altitudeAlarmOn && !self.pauseAltitudeAlarm {
+            
+            // higher than
+            if let altitudeAlarmHigherThan = self.setting.altitudeAlarmHigherThan {
+                if sense.altimeter! >= altitudeAlarmHigherThan {
+                    if !self.altitudeHigherThanTriggered {
+                        let altitude = "\(sense.altimeter!.toCurrentAltitudeUnit())\(setting.getAltitudeUnitSymbol())"
+                        let title = "Altitude too high! \(altitude)"
+                        let message = "Altitude alarm triggered"
+                        
+                        notify(title: title, message: message, identifier: identifiers.altitudeAlarm)
+                    }
+                    self.altitudeHigherThanTriggered = true
+                    
+                } else if sense.altimeter! < altitudeAlarmHigherThan - 5 {  // 5m
+                    // discard the alarm
+                    self.altitudeHigherThanTriggered = false
+                }
+            }
+        }
+    }
+    
+    func monitorPressure(sense: MeterSense) {
+        if self.setting.pressureAlarmOn && !self.pausePressureAlarm {
+            
+            // lower than
+            if let pressureAlarmLowerThan = self.setting.pressureAlarmLowerThan {
+                if sense.barometer! <= pressureAlarmLowerThan {
+                    if !self.pressureLowerThanTriggered {
+                        let pressure = "\(sense.barometer!.toCurrentPressureUnit())\(setting.getPressureUnitSymbol())"
+                        let title = "Pressure too low! \(pressure)"
+                        let message = "Pressure alarm triggered"
+                        
+                        notify(title: title, message: message, identifier: identifiers.pressureAlarm)
+                    }
+                    self.pressureLowerThanTriggered = true
+                    
+                } else if sense.barometer! > pressureAlarmLowerThan - 0.1 {  // 0.1kPa
+                    // discard the alarm
+                    self.pressureLowerThanTriggered = false
                 }
             }
         }
