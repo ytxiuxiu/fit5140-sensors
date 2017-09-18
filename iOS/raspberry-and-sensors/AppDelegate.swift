@@ -37,7 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        // ✴️ Attribute:
+        // StackOverflow: Swift- Remove Push Notification Badge number?
+        //      https://stackoverflow.com/questions/27769074/swift-remove-push-notification-badge-number
+        
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

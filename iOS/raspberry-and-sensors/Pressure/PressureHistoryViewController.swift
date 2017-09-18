@@ -26,7 +26,7 @@ class PressureHistoryViewController: UIViewController {
     
     @IBOutlet weak var dataSegment: UISegmentedControl!
     
-    let segmentSelectionToValue = ["barometer", "altimeter", "thermometer"]
+    let segmentSelectionToValue = [MeterSense.values.barometer, MeterSense.values.altimeter, MeterSense.values.thermometer]
     
     let segmentSelectionToLabel = ["Pressure", "Altitude", "Temperature"]
     
@@ -41,14 +41,14 @@ class PressureHistoryViewController: UIViewController {
         
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
 
-        chartView.chartDescription?.enabled = false
         chartView.noDataText = "No data"
+        chartView.chartDescription?.enabled = false
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         updateChart()
         
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,9 +62,23 @@ class PressureHistoryViewController: UIViewController {
         
         let value = segmentSelectionToValue[dataSegment.selectedSegmentIndex]
         
-        HTTP.shared.getHistory(sensor: "pressure", value: value, skip: 0, limit: Int(slider.value)) { (error, senses) in
+        HTTP.shared.getHistory(sensor: MeterSense.sensor, value: value, limit: Int(slider.value)) { (error, senses) in
             guard error == nil else {
                 print("Failed to get pressure history \(error!)")
+                
+                let alert = UIAlertController(title: "Failed to get history data", message: "\(error!)", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+                let data = LineChartData()
+                self.chartView.data = data
+                
+                DispatchQueue.main.async() {
+                    self.chartView.notifyDataSetChanged()
+                    self.activityIndicator.isHidden = true
+                    self.chartView.isHidden = false
+                }
+                
                 return
             }
             
@@ -74,11 +88,11 @@ class PressureHistoryViewController: UIViewController {
             for i in 0..<senses!.count {
                 var y: Double?
                 if selected == 0 {
-                    y = (senses![i] as! PressureSense).barometer?.toCurrentPressureUnit()
+                    y = (senses![i] as! MeterSense).barometer?.toCurrentPressureUnit()
                 } else if selected == 1 {
-                    y = (senses![i] as! PressureSense).altimeter?.toCurrentAltitudeUnit()
+                    y = (senses![i] as! MeterSense).altimeter?.toCurrentAltitudeUnit()
                 } else if selected == 2 {
-                    y = (senses![i] as! PressureSense).thermometer?.toCurrentTemperatureUnit()
+                    y = (senses![i] as! MeterSense).thermometer?.toCurrentTemperatureUnit()
                 }
                 
                 if let y = y {
@@ -96,6 +110,15 @@ class PressureHistoryViewController: UIViewController {
                 unit = self.setting.getAltitudeUnitSymbol()
             } else if selected == 2 {
                 unit = self.setting.getTemperatureUnitSymbol()
+            }
+            
+            // number of data available less than user specified
+            if senses!.count < Int(self.slider.value) {
+                self.chartView.chartDescription?.enabled = true
+                self.chartView.chartDescription?.text = "Only \(senses!.count) values available"
+                self.chartView.chartDescription?.textColor = UIColor.red
+            } else {
+                self.chartView.chartDescription?.enabled = false
             }
             
             line.label = "\(self.segmentSelectionToLabel[selected]) (\(unit))"

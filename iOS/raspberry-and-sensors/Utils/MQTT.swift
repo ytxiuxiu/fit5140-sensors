@@ -16,13 +16,13 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
     static let shared = MQTT()
     
-    static let topicPressure = "pressure"
+    static let topicMeters = "meters"
     
     var client: CocoaMQTT?
     
 //    var colourMonitors = [String: (pressure: Colour) -> Void]()
     
-    var pressureCallbacks = [String: (sense: PressureSense) -> Void]()
+    var pressureCallbacks = [String: (sense: MeterSense) -> Void]()
     
 
     override init() {
@@ -41,7 +41,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        self.client?.subscribe("pressure")
+        self.client?.subscribe(MQTT.topicMeters)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -61,12 +61,12 @@ class MQTT: NSObject, CocoaMQTTDelegate {
             do {
                 let info = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                 
-                if message.topic == MQTT.topicPressure {
-                    let thermometer = info["thermometer"] as! Double
-                    let barometer = info["barometer"] as! Double
-                    let altimeter = info["altimeter"] as! Double
+                if message.topic == MQTT.topicMeters {
+                    let thermometer = info[MeterSense.values.thermometer] as! Double
+                    let barometer = info[MeterSense.values.barometer] as! Double
+                    let altimeter = info[MeterSense.values.altimeter] as! Double
                     
-                    let pressure = PressureSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
+                    let pressure = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
 
                     for (_, callback) in self.pressureCallbacks {
                         callback(pressure)
@@ -110,7 +110,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     //        self.colourMonitors.removeValue(forKey: key)
     //    }
     
-    func addPressureMonitor(key: String, callback: @escaping (_ sensor: PressureSense) -> Void) {
+    func addPressureMonitor(key: String, callback: @escaping (_ sensor: MeterSense) -> Void) {
         self.pressureCallbacks[key] = callback;
     }
     

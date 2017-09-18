@@ -29,6 +29,9 @@ app.use((req, res, next) => {
 // error handler
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
+
+  console.error(err);
+
   res.json({
     message: err.message,
     error: req.app.get('env') === 'development' ? err : {}
@@ -39,29 +42,40 @@ app.use((err, req, res, next) => {
 //
 // Website: Expire Data from Collections by Setting TTL
 //    https://docs.mongodb.com/manual/tutorial/expire-data/
-db.get('pressure').createIndex({ time: 1 }, { expireAfterSeconds: 3600 * 24 });
+db.get('meters').createIndex({ time: 1 }, { expireAfterSeconds: 3600 * 24 });
 
 // mqtt & sensors
 mqtt.on('connect', () => {
 
-  sensors.getSensors((pressure) => {
+  sensors.getSensors((err, meters, rgb) => {
+    if (err) {
+      console.error('Failed to initialize sensors', err);
+      return;
+    }
 
-    pressure.on('change', () => {
+    meters.on('change', () => {
       const data = {
-        thermometer: pressure.thermometer.kelvin,
-        barometer: pressure.barometer.pressure,
-        altimeter: pressure.altimeter.meters,
+        thermometer: meters.thermometer.kelvin,
+        barometer: meters.barometer.pressure,
+        altimeter: meters.altimeter.meters,
         time: new Date()
       };
 
-      db.get('pressure').insert(data)
+      db.get('meters').insert(data)
         .catch((err) => {
           console.error('Failed to insert sensor data into MongoDB', err);
-        })
-        .then(() => {
-          db.close();
         });
-      mqtt.publish('pressure', JSON.stringify(data));
+      mqtt.publish('meters', JSON.stringify(data));
+    });
+
+    rgb.on('change', (err, res) => {
+      const data = {
+        r: res.r,
+        g: res.g,
+        b: res.b
+      };
+
+      mqtt.publish('colour', JSON.stringify(data));
     });
   });
 });

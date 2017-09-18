@@ -99,6 +99,12 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Realtime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zi3-5J-ndH">
+                                        <rect key="frame" x="290.5" y="514" width="52.5" height="16"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -109,6 +115,7 @@
                                     <constraint firstItem="QCk-o6-mBk" firstAttribute="leading" secondItem="X3T-Wb-QDt" secondAttribute="leading" id="Jbh-CN-obE"/>
                                     <constraint firstItem="VMF-nB-5FJ" firstAttribute="centerX" secondItem="fqi-83-SHL" secondAttribute="centerX" id="Orj-28-XpR"/>
                                     <constraint firstItem="2f7-BE-civ" firstAttribute="centerX" secondItem="QCk-o6-mBk" secondAttribute="centerX" id="UpC-Ea-LbA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zi3-5J-ndH" secondAttribute="trailing" id="Wpu-Td-QuH"/>
                                     <constraint firstItem="ND3-lv-OhO" firstAttribute="centerX" secondItem="3DC-8E-9v4" secondAttribute="centerX" id="ZYm-LZ-j4G"/>
                                     <constraint firstItem="3DC-8E-9v4" firstAttribute="top" secondItem="X3T-Wb-QDt" secondAttribute="top" id="ian-Zb-qza"/>
                                     <constraint firstItem="fqi-83-SHL" firstAttribute="width" secondItem="X3T-Wb-QDt" secondAttribute="width" multiplier="0.5" id="j0v-KM-mmJ"/>
@@ -116,16 +123,26 @@
                                     <constraint firstItem="ND3-lv-OhO" firstAttribute="top" secondItem="3DC-8E-9v4" secondAttribute="bottom" constant="12" id="rLx-XG-VGg"/>
                                     <constraint firstItem="VMF-nB-5FJ" firstAttribute="top" secondItem="fqi-83-SHL" secondAttribute="bottom" constant="12" id="udg-tC-kTq"/>
                                     <constraint firstItem="QCk-o6-mBk" firstAttribute="top" secondItem="VMF-nB-5FJ" secondAttribute="bottom" constant="8" id="wI4-Pq-3dH"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zi3-5J-ndH" secondAttribute="bottom" id="xSf-zm-5TS"/>
                                     <constraint firstAttribute="trailing" secondItem="fqi-83-SHL" secondAttribute="trailing" id="yEV-eo-3pI"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bYb-Bc-eiH">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="YSk-PK-MDU"/>
+                                    <constraint firstAttribute="height" constant="20" id="c0L-ST-QWn"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X3T-Wb-QDt" firstAttribute="top" secondItem="fJa-7K-jlA" secondAttribute="bottom" constant="16" id="DUc-jq-aSS"/>
+                            <constraint firstItem="bYb-Bc-eiH" firstAttribute="centerY" secondItem="HJz-mt-xQk" secondAttribute="centerY" id="MRh-3C-Xg5"/>
                             <constraint firstItem="X3T-Wb-QDt" firstAttribute="trailing" secondItem="HJz-mt-xQk" secondAttribute="trailingMargin" id="NYc-mQ-OcL"/>
                             <constraint firstItem="X3T-Wb-QDt" firstAttribute="leading" secondItem="HJz-mt-xQk" secondAttribute="leadingMargin" id="TMe-yZ-hY5"/>
                             <constraint firstItem="bv2-Eq-oeN" firstAttribute="top" secondItem="X3T-Wb-QDt" secondAttribute="bottom" constant="8" id="cpg-Xv-dRM"/>
+                            <constraint firstItem="bYb-Bc-eiH" firstAttribute="centerX" secondItem="HJz-mt-xQk" secondAttribute="centerX" id="xRX-Gd-2VY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pressure" id="bXw-FD-nTV">
@@ -136,8 +153,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="bYb-Bc-eiH" id="2WP-6o-HWP"/>
                         <outlet property="altitudeLabel" destination="1Yb-V9-pOw" id="QFZ-CL-A9s"/>
                         <outlet property="altitudeView" destination="fqi-83-SHL" id="eXu-r0-Ojd"/>
+                        <outlet property="meterView" destination="X3T-Wb-QDt" id="bIB-uW-Btm"/>
                         <outlet property="pressureLabel" destination="5I5-oh-Fu8" id="nZW-nG-lOJ"/>
                         <outlet property="pressureView" destination="3DC-8E-9v4" id="zzm-iz-e2u"/>
                         <outlet property="temperatureLabel" destination="GH7-5q-a95" id="mqF-zE-gWA"/>
@@ -160,16 +179,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-no-SoF">
-                                <rect key="frame" x="14" y="580" width="300" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-no-SoF">
+                                <rect key="frame" x="14" y="580" width="290" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="DSv-mw-0BS" eventType="valueChanged" id="pTX-Kp-Xnp"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQ9-L4-P6l">
-                                <rect key="frame" x="320" y="584.5" width="39" height="21"/>
+                                <rect key="frame" x="310" y="584.5" width="49" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="39" id="fbB-8P-ndu"/>
+                                    <constraint firstAttribute="width" constant="49" id="wCB-2s-3Xf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>

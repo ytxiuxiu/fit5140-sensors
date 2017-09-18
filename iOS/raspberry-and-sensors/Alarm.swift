@@ -22,6 +22,8 @@ class Alarm: NSObject {
     
     var pauseTemperatureAlarm = false
     
+    let identifiers = (temperatureAlarm: "temperatureAlarm", pressureAlarm: "pressureAlarm", altitudeAlarm: "altitudeAlarm")
+    
     
     override init() {
         super.init()
@@ -41,7 +43,7 @@ class Alarm: NSObject {
         }
     }
     
-    func monitorTemperature(sense: PressureSense) {
+    func monitorTemperature(sense: MeterSense) {
         if self.setting.temperatureAlarmOn && !self.pauseTemperatureAlarm {
             
             // higher than
@@ -52,7 +54,7 @@ class Alarm: NSObject {
                         let title = "Temperature too high! \(temperature)"
                         let message = "Temperature alarm triggered"
                         
-                        notify(title: title, message: message)
+                        notify(title: title, message: message, identifier: identifiers.temperatureAlarm)
                     }
                     self.temperatureHigherThanTriggered = true
                     
@@ -70,7 +72,7 @@ class Alarm: NSObject {
                         let title = "Temperature too low! \(temperature)"
                         let message = "Temperature alarm triggered"
                         
-                        notify(title: title, message: message)
+                        notify(title: title, message: message, identifier: identifiers.temperatureAlarm)
                     }
                     self.temperatureLowerThanTriggered = true
                     
@@ -82,7 +84,7 @@ class Alarm: NSObject {
         }
     }
     
-    func notify(title: String, message: String) {
+    func notify(title: String, message: String, identifier: String) {
         
         // ✴️ Attributes:
         // Website: Swift Tutorial : CoreLocation and Region Monitoring in iOS 8
@@ -97,10 +99,10 @@ class Alarm: NSObject {
         content.title = title
         content.sound = UNNotificationSound.default()
         content.body = message
-        content.categoryIdentifier = "alarm"
+        content.categoryIdentifier = identifier
         content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
         
-        let request = UNNotificationRequest(identifier: "alarm", content: content, trigger: nil)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
         

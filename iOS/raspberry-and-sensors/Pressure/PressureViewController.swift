@@ -23,6 +23,11 @@ class PressureViewController: UIViewController {
     
     @IBOutlet weak var temperatureView: UIView!
     
+    @IBOutlet weak var meterView: UIView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     var pressureLayer: CAShapeLayer?
     
     var altitudeLayer: CAShapeLayer?
@@ -30,6 +35,8 @@ class PressureViewController: UIViewController {
     var temperatureLayer: CAShapeLayer?
     
     let mqtt = MQTT.shared
+    
+    let http = HTTP.shared
     
     let setting = Setting.shared
 
@@ -45,13 +52,20 @@ class PressureViewController: UIViewController {
     
     var temperatureMax = 323.15
     
+    var lastPressure: Double?
+    
+    var lastAltitude: Double?
+    
+    var lastTemperature: Double?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        meterView.isHidden = true
+        activityIndicator.isHidden = false
         
         let pressureMinDefault = 30.0
         let pressureMaxDefault = 120.0
@@ -75,41 +89,78 @@ class PressureViewController: UIViewController {
         self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: altitudeMin)
         self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: temperatureMin)
         
+        // fetch current data or use last data if available
+        if let lastPressure = lastPressure {
+            let pressureData = self.processPressureData(pressure: lastPressure)
+            self.showPressure(data: pressureData)
+            
+            meterView.isHidden = false
+            activityIndicator.isHidden = true
+        } else {
+            http.getHistory(sensor: MeterSense.sensor, value: "\(MeterSense.values.thermometer),\(MeterSense.values.barometer),\(MeterSense.values.altimeter)", limit: 1, callback: { (error, senses) in
+                guard error == nil else {
+                    print("Cannot get current data from the server \(error!)")
+                    return
+                }
+                
+                if let sense = senses?[0] as? MeterSense {
+                    if let pressure = sense.barometer {
+                        let pressureData = self.processPressureData(pressure: pressure)
+                        self.showPressure(data: pressureData)
+                    }
+                    
+                    if let altitude = sense.altimeter {
+                        let altitudeData = self.processAltitudeData(altitude: altitude)
+                        self.showAltitude(data: altitudeData)
+                    }
+                    
+                    if let temperature = sense.thermometer {
+                        let temperatureData = self.processTemperatureData(temperature: temperature)
+                        self.showTemperature(data: temperatureData)
+                    }
+                }
+                
+                DispatchQueue.main.async() {
+                    self.meterView.isHidden = false
+                    self.activityIndicator.isHidden = true
+                }
+            })
+        }
+        if let lastAltitude = lastAltitude {
+            let altitudeData = self.processAltitudeData(altitude: lastAltitude)
+            self.showAltitude(data: altitudeData)
+        }
+        if let lastTemperature = lastTemperature {
+            let temperatureData = self.processTemperatureData(temperature: lastTemperature)
+            self.showTemperature(data: temperatureData)
+        }
+        
+        // listen to sensor changes
         listenToSensors()
 
+        super.viewWillAppear(animated)
     }
     
     func listenToSensors() {
         self.mqtt.addPressureMonitor(key: "pressureViewController", callback: { (sensor) in
             if let pressure = sensor.barometer {
-                var pressureData = pressure.toCurrentPressureUnit()
-                
-                // make sure they are not execeeds the range
-                pressureData = pressureData <= self.pressureMax ? pressureData : self.pressureMax
-                pressureData = pressureData >= self.pressureMin ? pressureData : self.pressureMin
-                
-                self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: pressureData)
-                self.pressureLabel.text = "\(pressureData.simplify())\(self.setting.getPressureUnitSymbol())"
+                let pressureData = self.processPressureData(pressure: pressure)
+                self.showPressure(data: pressureData)
             }
             
             if let altitude = sensor.altimeter {
-                var altitudeData = altitude.toCurrentAltitudeUnit()
-                
-                altitudeData = altitudeData <= self.altitudeMax ? altitudeData : self.altitudeMax
-                altitudeData = altitudeData >= self.altitudeMin ? altitudeData : self.altitudeMin
-
-                self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: altitudeData)
-                self.altitudeLabel.text = "\(altitudeData.simplify())\(self.setting.getAltitudeUnitSymbol())"
+                let altitudeData = self.processAltitudeData(altitude: altitude)
+                self.showAltitude(data: altitudeData)
             }
             
             if let temperature = sensor.thermometer {
-                var temperatureData = temperature.toCurrentTemperatureUnit()
-                
-                temperatureData = temperatureData <= self.temperatureMax ? temperatureData : self.temperatureMax
-                temperatureData = temperatureData >= self.temperatureMin ? temperatureData : self.temperatureMin
-                
-                self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: temperatureData)
-                self.temperatureLabel.text = "\(temperatureData.simplify())\(self.setting.getTemperatureUnitSymbol())"
+                let temperatureData = self.processTemperatureData(temperature: temperature)
+                self.showTemperature(data: temperatureData)
+            }
+            
+            DispatchQueue.main.async() {
+                self.meterView.isHidden = false
+                self.activityIndicator.isHidden = true
             }
         })
 
@@ -127,6 +178,58 @@ class PressureViewController: UIViewController {
         pressureLabel.text = "-.-"
         altitudeLabel.text = "-.-"
         temperatureLabel.text = "-.-"
+    }
+    
+    func processPressureData(pressure: Double) -> Double {
+        self.lastPressure = pressure
+        var pressureData = pressure.toCurrentPressureUnit()
+        
+        // make sure they are not execeeds the range
+        pressureData = pressureData <= self.pressureMax ? pressureData : self.pressureMax
+        pressureData = pressureData >= self.pressureMin ? pressureData : self.pressureMin
+
+        return pressureData
+    }
+    
+    func showPressure(data: Double) {
+        DispatchQueue.main.async() {
+            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: data)
+            self.pressureLabel.text = "\(data.simplify())\(self.setting.getPressureUnitSymbol())"
+        }
+    }
+    
+    func processAltitudeData(altitude: Double) -> Double {
+        self.lastAltitude = altitude
+        var altitudeData = altitude.toCurrentAltitudeUnit()
+        
+        altitudeData = altitudeData <= self.altitudeMax ? altitudeData : self.altitudeMax
+        altitudeData = altitudeData >= self.altitudeMin ? altitudeData : self.altitudeMin
+        
+        return altitudeData
+    }
+    
+    func showAltitude(data: Double) {
+        DispatchQueue.main.async() {
+            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: data)
+            self.altitudeLabel.text = "\(data.simplify())\(self.setting.getAltitudeUnitSymbol())"
+        }
+    }
+    
+    func processTemperatureData(temperature: Double) -> Double {
+        self.lastTemperature = temperature
+        var temperatureData = temperature.toCurrentTemperatureUnit()
+        
+        temperatureData = temperatureData <= self.temperatureMax ? temperatureData : self.temperatureMax
+        temperatureData = temperatureData >= self.temperatureMin ? temperatureData : self.temperatureMin
+
+        return temperatureData
+    }
+    
+    func showTemperature(data: Double) {
+        DispatchQueue.main.async() {
+            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: data)
+            self.temperatureLabel.text = "\(data.simplify())\(self.setting.getTemperatureUnitSymbol())"
+        }
     }
     
     func drawDataRing(dataLayer: inout CAShapeLayer?, view: UIView, min: Double, max: Double, data: Double) {
