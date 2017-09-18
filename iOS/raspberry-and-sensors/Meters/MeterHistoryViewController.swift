@@ -14,7 +14,7 @@
 import UIKit
 import Charts
 
-class PressureHistoryViewController: UIViewController {
+class MeterHistoryViewController: UIViewController {
 
     @IBOutlet weak var chartView: LineChartView!
     

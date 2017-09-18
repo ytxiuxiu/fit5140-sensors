@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6523FBA01F6FE89000662D26 /* ColourSense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523FB9F1F6FE89000662D26 /* ColourSense.swift */; };
+		6523FBA31F6FEDE700662D26 /* MeterHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523FBA11F6FEDE700662D26 /* MeterHistoryViewController.swift */; };
+		6523FBA41F6FEDE700662D26 /* MeterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523FBA21F6FEDE700662D26 /* MeterViewController.swift */; };
 		6547AA5B1F6E957A00A9B7F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6547AA5A1F6E957A00A9B7F8 /* Assets.xcassets */; };
 		6547AA5D1F6E9DAA00A9B7F8 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547AA5C1F6E9DAA00A9B7F8 /* Alarm.swift */; };
 		658F51231F67970100266768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51221F67970100266768 /* AppDelegate.swift */; };
@@ -20,14 +22,12 @@
 		65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */; };
 		65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* MeterSense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* MeterSense.swift */; };
-		65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AED1F67FAEC003FF669 /* PressureViewController.swift */; };
 		65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */; };
 		65CD76DA1F6BCE9A002EA795 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */; };
 		65CD76DC1F6BE087002EA795 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76DB1F6BE087002EA795 /* UIViewControllerExtension.swift */; };
 		65CD76DE1F6BF8B6002EA795 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76DD1F6BF8B6002EA795 /* UITextFieldExtension.swift */; };
 		65CD76E01F6C0C81002EA795 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76DF1F6C0C81002EA795 /* StringExtension.swift */; };
 		65CD76E41F6CCD01002EA795 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76E31F6CCD01002EA795 /* HTTP.swift */; };
-		65CD76F01F6CD866002EA795 /* PressureHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76EF1F6CD866002EA795 /* PressureHistoryViewController.swift */; };
 		65F172A51F6AAC85000DAE2F /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F172A41F6AAC85000DAE2F /* Setting.swift */; };
 		65F172A91F6ABC2B000DAE2F /* MainSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F172A81F6ABC2B000DAE2F /* MainSettingTableViewController.swift */; };
 		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
@@ -47,6 +47,8 @@
 		072C01304176A3A1F92D761D /* Pods-raspberry-and-sensors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.release.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.release.xcconfig"; sourceTree = "<group>"; };
 		235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_raspberry_and_sensors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6523FB9F1F6FE89000662D26 /* ColourSense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColourSense.swift; path = Entities/ColourSense.swift; sourceTree = "<group>"; };
+		6523FBA11F6FEDE700662D26 /* MeterHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeterHistoryViewController.swift; path = Meters/MeterHistoryViewController.swift; sourceTree = "<group>"; };
+		6523FBA21F6FEDE700662D26 /* MeterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeterViewController.swift; path = Meters/MeterViewController.swift; sourceTree = "<group>"; };
 		6547AA5A1F6E957A00A9B7F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6547AA5C1F6E9DAA00A9B7F8 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		658F511F1F67970100266768 /* raspberry-and-sensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "raspberry-and-sensors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,14 +65,12 @@
 		65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataClass.swift"; path = "Entities/Colour+CoreDataClass.swift"; sourceTree = "<group>"; };
 		65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataProperties.swift"; path = "Entities/Colour+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		65917AE81F67CCA1003FF669 /* MeterSense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterSense.swift; sourceTree = "<group>"; };
-		65917AED1F67FAEC003FF669 /* PressureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PressureViewController.swift; path = Pressure/PressureViewController.swift; sourceTree = "<group>"; };
 		65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemperatureAlarmSettingTableViewController.swift; path = Settings/TemperatureAlarmSettingTableViewController.swift; sourceTree = "<group>"; };
 		65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Utils/DoubleExtension.swift; sourceTree = "<group>"; };
 		65CD76DB1F6BE087002EA795 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewControllerExtension.swift; path = Utils/UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		65CD76DD1F6BF8B6002EA795 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITextFieldExtension.swift; path = Utils/UITextFieldExtension.swift; sourceTree = "<group>"; };
 		65CD76DF1F6C0C81002EA795 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Utils/StringExtension.swift; sourceTree = "<group>"; };
 		65CD76E31F6CCD01002EA795 /* HTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTP.swift; path = Utils/HTTP.swift; sourceTree = "<group>"; };
-		65CD76EF1F6CD866002EA795 /* PressureHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PressureHistoryViewController.swift; path = Pressure/PressureHistoryViewController.swift; sourceTree = "<group>"; };
 		65F172A41F6AAC85000DAE2F /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = Settings/Setting.swift; sourceTree = "<group>"; };
 		65F172A81F6ABC2B000DAE2F /* MainSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainSettingTableViewController.swift; path = Settings/MainSettingTableViewController.swift; sourceTree = "<group>"; };
 		E6CBDD5D77830D918CA657FE /* Pods-raspberry-and-sensors.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.debug.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				65917AEC1F67FAC2003FF669 /* Colour */,
-				65917AEB1F67FAB5003FF669 /* Pressure */,
+				65917AEB1F67FAB5003FF669 /* Meter */,
 				65917AEA1F67E297003FF669 /* Settings */,
 				65917ADF1F67C7A6003FF669 /* Entities */,
 				65917ADE1F67ADF7003FF669 /* Utils */,
@@ -178,13 +178,13 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		65917AEB1F67FAB5003FF669 /* Pressure */ = {
+		65917AEB1F67FAB5003FF669 /* Meter */ = {
 			isa = PBXGroup;
 			children = (
-				65917AED1F67FAEC003FF669 /* PressureViewController.swift */,
-				65CD76EF1F6CD866002EA795 /* PressureHistoryViewController.swift */,
+				6523FBA11F6FEDE700662D26 /* MeterHistoryViewController.swift */,
+				6523FBA21F6FEDE700662D26 /* MeterViewController.swift */,
 			);
-			name = Pressure;
+			name = Meter;
 			sourceTree = "<group>";
 		};
 		65917AEC1F67FAC2003FF669 /* Colour */ = {
@@ -384,16 +384,16 @@
 				65F172A91F6ABC2B000DAE2F /* MainSettingTableViewController.swift in Sources */,
 				65CD76DC1F6BE087002EA795 /* UIViewControllerExtension.swift in Sources */,
 				658F51251F67970100266768 /* MainViewController.swift in Sources */,
+				6523FBA41F6FEDE700662D26 /* MeterViewController.swift in Sources */,
 				65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */,
 				65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */,
 				65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */,
+				6523FBA31F6FEDE700662D26 /* MeterHistoryViewController.swift in Sources */,
 				6547AA5D1F6E9DAA00A9B7F8 /* Alarm.swift in Sources */,
 				658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */,
 				6523FBA01F6FE89000662D26 /* ColourSense.swift in Sources */,
 				65CD76E01F6C0C81002EA795 /* StringExtension.swift in Sources */,
-				65CD76F01F6CD866002EA795 /* PressureHistoryViewController.swift in Sources */,
 				65CD76E41F6CCD01002EA795 /* HTTP.swift in Sources */,
-				65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */,
 				65CD76DE1F6BF8B6002EA795 /* UITextFieldExtension.swift in Sources */,
 				65F172A51F6AAC85000DAE2F /* Setting.swift in Sources */,
 				658F51231F67970100266768 /* AppDelegate.swift in Sources */,

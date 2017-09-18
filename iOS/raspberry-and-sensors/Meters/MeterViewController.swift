@@ -9,7 +9,7 @@
 import UIKit
 import CocoaMQTT
 
-class PressureViewController: UIViewController {
+class MeterViewController: UIViewController {
 
     @IBOutlet weak var pressureLabel: UILabel!
     

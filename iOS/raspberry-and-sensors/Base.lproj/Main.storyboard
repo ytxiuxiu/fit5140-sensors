@@ -15,7 +15,7 @@
         <!--Pressure-->
         <scene sceneID="Vgo-4G-CRR">
             <objects>
-                <viewController id="11S-le-ds9" customClass="PressureViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="11S-le-ds9" customClass="MeterViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fJa-7K-jlA"/>
                         <viewControllerLayoutGuide type="bottom" id="bv2-Eq-oeN"/>
@@ -170,7 +170,7 @@
         <!--History-->
         <scene sceneID="g2F-o7-TU9">
             <objects>
-                <viewController title="History" id="DSv-mw-0BS" customClass="PressureHistoryViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="History" id="DSv-mw-0BS" customClass="MeterHistoryViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AJ6-XA-jPM"/>
                         <viewControllerLayoutGuide type="bottom" id="Jpg-45-ZFR"/>
