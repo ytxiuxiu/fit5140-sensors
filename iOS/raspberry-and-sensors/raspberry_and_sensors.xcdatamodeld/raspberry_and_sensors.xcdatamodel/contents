@@ -7,15 +7,7 @@
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="r" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Pressure" representedClassName="Pressure" syncable="YES">
-        <attribute name="addedAt" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="altitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="pressure" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="temperature" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Pressure" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Colour" positionX="-54" positionY="18" width="128" height="120"/>
     </elements>
 </model>

@@ -19,8 +19,6 @@
 		65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917ADC1F67ADF3003FF669 /* MQTT.swift */; };
 		65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */; };
 		65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */; };
-		65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */; };
-		65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* MeterSense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* MeterSense.swift */; };
 		65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AED1F67FAEC003FF669 /* PressureViewController.swift */; };
 		65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */; };
@@ -64,8 +62,6 @@
 		65917ADC1F67ADF3003FF669 /* MQTT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MQTT.swift; path = Utils/MQTT.swift; sourceTree = "<group>"; };
 		65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataClass.swift"; path = "Entities/Colour+CoreDataClass.swift"; sourceTree = "<group>"; };
 		65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataProperties.swift"; path = "Entities/Colour+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataClass.swift"; path = "Entities/Pressure+CoreDataClass.swift"; sourceTree = "<group>"; };
-		65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pressure+CoreDataProperties.swift"; path = "Entities/Pressure+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		65917AE81F67CCA1003FF669 /* MeterSense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterSense.swift; sourceTree = "<group>"; };
 		65917AED1F67FAEC003FF669 /* PressureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PressureViewController.swift; path = Pressure/PressureViewController.swift; sourceTree = "<group>"; };
 		65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemperatureAlarmSettingTableViewController.swift; path = Settings/TemperatureAlarmSettingTableViewController.swift; sourceTree = "<group>"; };
@@ -166,8 +162,6 @@
 			children = (
 				65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */,
 				65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */,
-				65917AE21F67CB86003FF669 /* Pressure+CoreDataClass.swift */,
-				65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */,
 				65917AE81F67CCA1003FF669 /* MeterSense.swift */,
 				6523FB9F1F6FE89000662D26 /* ColourSense.swift */,
 			);
@@ -387,7 +381,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */,
 				65F172A91F6ABC2B000DAE2F /* MainSettingTableViewController.swift in Sources */,
 				65CD76DC1F6BE087002EA795 /* UIViewControllerExtension.swift in Sources */,
 				658F51251F67970100266768 /* MainViewController.swift in Sources */,
@@ -405,7 +398,6 @@
 				65F172A51F6AAC85000DAE2F /* Setting.swift in Sources */,
 				658F51231F67970100266768 /* AppDelegate.swift in Sources */,
 				65917AE91F67CCA1003FF669 /* MeterSense.swift in Sources */,
-				65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */,
 				65CD76DA1F6BCE9A002EA795 /* DoubleExtension.swift in Sources */,
 				65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */,
 			);
