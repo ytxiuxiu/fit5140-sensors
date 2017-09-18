@@ -4,4 +4,6 @@ use_frameworks!
 
 target 'raspberry-and-sensors' do
   pod 'CocoaMQTT'
+  pod 'Charts'
+  pod 'Whisper'
 end

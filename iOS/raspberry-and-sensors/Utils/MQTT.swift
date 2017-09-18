@@ -16,9 +16,13 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
     static let shared = MQTT()
     
-    static let topicPressure = "pressure"
+    static let topicMeters = "meters"
     
     var client: CocoaMQTT?
+    
+//    var colourMonitors = [String: (pressure: Colour) -> Void]()
+    
+    var meterCallbacks = [String: (sense: MeterSense) -> Void]()
     
 
     override init() {
@@ -27,15 +31,17 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         print("MQTT init")
         
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
+//        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
         self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
+        self.client?.autoReconnect = true
         self.client?.connect()
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        self.client?.subscribe("pressure")
+        self.client?.subscribe(MQTT.topicMeters)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -55,14 +61,16 @@ class MQTT: NSObject, CocoaMQTTDelegate {
             do {
                 let info = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                 
-                if message.topic == MQTT.topicPressure {
-                    let thermometer = info["thermometer"] as! Double
-                    let barometer = info["barometer"] as! Double
-                    let altimeter = info["altimeter"] as! Double
+                if message.topic == MQTT.topicMeters {
+                    let thermometer = info[MeterSense.values.thermometer] as! Double
+                    let barometer = info[MeterSense.values.barometer] as! Double
+                    let altimeter = info[MeterSense.values.altimeter] as! Double
                     
-                    let sensor = PressureSensor(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
-                    
-                    print(sensor)
+                    let pressure = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
+
+                    for (_, callback) in self.meterCallbacks {
+                        callback(pressure)
+                    }
                 }
                 
             } catch let error as NSError {
@@ -94,4 +102,20 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         }
     }
     
+    //    func addColourMonitor(key: String, callback: @escaping (_ sensor: ColourSensor) -> Void) {
+    //        self.colourMonitors[key] = callback;
+    //    }
+    //
+    //    func removeColourMonitor(key: String) {
+    //        self.colourMonitors.removeValue(forKey: key)
+    //    }
+    
+    func addMeterMonitor(key: String, callback: @escaping (_ sensor: MeterSense) -> Void) {
+        self.meterCallbacks[key] = callback;
+    }
+    
+    func removeMeterMonitor(key: String) {
+        self.meterCallbacks.removeValue(forKey: key)
+    }
+
 }

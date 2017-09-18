@@ -15,7 +15,7 @@
         <!--Pressure-->
         <scene sceneID="Vgo-4G-CRR">
             <objects>
-                <viewController id="11S-le-ds9" customClass="PressureViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="11S-le-ds9" customClass="MeterViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fJa-7K-jlA"/>
                         <viewControllerLayoutGuide type="bottom" id="bv2-Eq-oeN"/>
@@ -25,20 +25,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3T-Wb-QDt">
-                                <rect key="frame" x="16" y="72" width="343" height="538"/>
+                                <rect key="frame" x="16" y="80" width="343" height="530"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udq-mf-c2v">
-                                        <rect key="frame" x="147" y="454" width="49" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Record"/>
-                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqi-83-SHL">
                                         <rect key="frame" x="171.5" y="0.0" width="171.5" height="86"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="56m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yb-V9-pOw">
-                                                <rect key="frame" x="70.5" y="34.5" width="30.5" height="51.5"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                <color key="textColor" red="0.31372549020000001" green="1" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-.-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yb-V9-pOw">
+                                                <rect key="frame" x="78.5" y="34.5" width="15" height="51.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" red="0.14901960784313725" green="0.65098039215686276" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -53,10 +48,10 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DC-8E-9v4">
                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="86"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000hPa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5I5-oh-Fu8">
-                                                <rect key="frame" x="55.5" y="34.5" width="61" height="51.5"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                <color key="textColor" red="0.31372549020000001" green="1" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-.-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5I5-oh-Fu8">
+                                                <rect key="frame" x="78.5" y="34.5" width="15" height="51.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" red="0.14901960784313725" green="0.65098039215686276" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -69,12 +64,12 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCk-o6-mBk">
-                                        <rect key="frame" x="0.0" y="123" width="343" height="171.5"/>
+                                        <rect key="frame" x="0.0" y="127" width="343" height="171.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27.0℃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GH7-5q-a95">
-                                                <rect key="frame" x="125" y="68.5" width="93" height="103"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-.-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GH7-5q-a95">
+                                                <rect key="frame" x="155" y="68.5" width="33" height="103"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
-                                                <color key="textColor" red="0.31372549019607843" green="1" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.14901960784313725" green="0.65098039215686276" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -87,27 +82,32 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ND3-lv-OhO">
-                                        <rect key="frame" x="52" y="94" width="68" height="21"/>
+                                        <rect key="frame" x="52" y="98" width="68" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMF-nB-5FJ">
-                                        <rect key="frame" x="227.5" y="94" width="60" height="21"/>
+                                        <rect key="frame" x="227.5" y="98" width="60" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f7-BE-civ">
-                                        <rect key="frame" x="122.5" y="302.5" width="98" height="21"/>
+                                        <rect key="frame" x="122.5" y="306.5" width="98" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Realtime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zi3-5J-ndH">
+                                        <rect key="frame" x="290.5" y="514" width="52.5" height="16"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="VMF-nB-5FJ" firstAttribute="top" secondItem="fqi-83-SHL" secondAttribute="bottom" constant="8" id="1XX-L5-VWw"/>
                                     <constraint firstAttribute="trailing" secondItem="QCk-o6-mBk" secondAttribute="trailing" id="4VV-Xb-i6w"/>
                                     <constraint firstItem="2f7-BE-civ" firstAttribute="top" secondItem="QCk-o6-mBk" secondAttribute="bottom" constant="8" id="835-Sp-56f"/>
                                     <constraint firstItem="fqi-83-SHL" firstAttribute="top" secondItem="X3T-Wb-QDt" secondAttribute="top" id="HK9-dx-Gdh"/>
@@ -115,23 +115,34 @@
                                     <constraint firstItem="QCk-o6-mBk" firstAttribute="leading" secondItem="X3T-Wb-QDt" secondAttribute="leading" id="Jbh-CN-obE"/>
                                     <constraint firstItem="VMF-nB-5FJ" firstAttribute="centerX" secondItem="fqi-83-SHL" secondAttribute="centerX" id="Orj-28-XpR"/>
                                     <constraint firstItem="2f7-BE-civ" firstAttribute="centerX" secondItem="QCk-o6-mBk" secondAttribute="centerX" id="UpC-Ea-LbA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Zi3-5J-ndH" secondAttribute="trailing" id="Wpu-Td-QuH"/>
                                     <constraint firstItem="ND3-lv-OhO" firstAttribute="centerX" secondItem="3DC-8E-9v4" secondAttribute="centerX" id="ZYm-LZ-j4G"/>
                                     <constraint firstItem="3DC-8E-9v4" firstAttribute="top" secondItem="X3T-Wb-QDt" secondAttribute="top" id="ian-Zb-qza"/>
                                     <constraint firstItem="fqi-83-SHL" firstAttribute="width" secondItem="X3T-Wb-QDt" secondAttribute="width" multiplier="0.5" id="j0v-KM-mmJ"/>
                                     <constraint firstItem="3DC-8E-9v4" firstAttribute="width" secondItem="X3T-Wb-QDt" secondAttribute="width" multiplier="0.5" id="pIX-fG-UYC"/>
-                                    <constraint firstItem="ND3-lv-OhO" firstAttribute="top" secondItem="3DC-8E-9v4" secondAttribute="bottom" constant="8" id="rLx-XG-VGg"/>
-                                    <constraint firstItem="VMF-nB-5FJ" firstAttribute="top" secondItem="fqi-83-SHL" secondAttribute="bottom" constant="8" id="udg-tC-kTq"/>
+                                    <constraint firstItem="ND3-lv-OhO" firstAttribute="top" secondItem="3DC-8E-9v4" secondAttribute="bottom" constant="12" id="rLx-XG-VGg"/>
+                                    <constraint firstItem="VMF-nB-5FJ" firstAttribute="top" secondItem="fqi-83-SHL" secondAttribute="bottom" constant="12" id="udg-tC-kTq"/>
                                     <constraint firstItem="QCk-o6-mBk" firstAttribute="top" secondItem="VMF-nB-5FJ" secondAttribute="bottom" constant="8" id="wI4-Pq-3dH"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zi3-5J-ndH" secondAttribute="bottom" id="xSf-zm-5TS"/>
                                     <constraint firstAttribute="trailing" secondItem="fqi-83-SHL" secondAttribute="trailing" id="yEV-eo-3pI"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bYb-Bc-eiH">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="YSk-PK-MDU"/>
+                                    <constraint firstAttribute="height" constant="20" id="c0L-ST-QWn"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="X3T-Wb-QDt" firstAttribute="top" secondItem="fJa-7K-jlA" secondAttribute="bottom" constant="8" id="DUc-jq-aSS"/>
+                            <constraint firstItem="X3T-Wb-QDt" firstAttribute="top" secondItem="fJa-7K-jlA" secondAttribute="bottom" constant="16" id="DUc-jq-aSS"/>
+                            <constraint firstItem="bYb-Bc-eiH" firstAttribute="centerY" secondItem="HJz-mt-xQk" secondAttribute="centerY" id="MRh-3C-Xg5"/>
                             <constraint firstItem="X3T-Wb-QDt" firstAttribute="trailing" secondItem="HJz-mt-xQk" secondAttribute="trailingMargin" id="NYc-mQ-OcL"/>
                             <constraint firstItem="X3T-Wb-QDt" firstAttribute="leading" secondItem="HJz-mt-xQk" secondAttribute="leadingMargin" id="TMe-yZ-hY5"/>
                             <constraint firstItem="bv2-Eq-oeN" firstAttribute="top" secondItem="X3T-Wb-QDt" secondAttribute="bottom" constant="8" id="cpg-Xv-dRM"/>
+                            <constraint firstItem="bYb-Bc-eiH" firstAttribute="centerX" secondItem="HJz-mt-xQk" secondAttribute="centerX" id="xRX-Gd-2VY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pressure" id="bXw-FD-nTV">
@@ -142,8 +153,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="bYb-Bc-eiH" id="2WP-6o-HWP"/>
+                        <outlet property="altitudeLabel" destination="1Yb-V9-pOw" id="QFZ-CL-A9s"/>
                         <outlet property="altitudeView" destination="fqi-83-SHL" id="eXu-r0-Ojd"/>
+                        <outlet property="meterView" destination="X3T-Wb-QDt" id="bIB-uW-Btm"/>
+                        <outlet property="pressureLabel" destination="5I5-oh-Fu8" id="nZW-nG-lOJ"/>
                         <outlet property="pressureView" destination="3DC-8E-9v4" id="zzm-iz-e2u"/>
+                        <outlet property="temperatureLabel" destination="GH7-5q-a95" id="mqF-zE-gWA"/>
                         <outlet property="temperatureView" destination="QCk-o6-mBk" id="qhh-io-RZI"/>
                     </connections>
                 </viewController>
@@ -151,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="2424.8000000000002" y="69.715142428785612"/>
         </scene>
-        <!--View Controller-->
+        <!--History-->
         <scene sceneID="g2F-o7-TU9">
             <objects>
-                <viewController id="DSv-mw-0BS" sceneMemberID="viewController">
+                <viewController title="History" id="DSv-mw-0BS" customClass="MeterHistoryViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AJ6-XA-jPM"/>
                         <viewControllerLayoutGuide type="bottom" id="Jpg-45-ZFR"/>
@@ -162,12 +178,69 @@
                     <view key="view" contentMode="scaleToFill" id="jHz-JT-GRT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="BV6-no-SoF">
+                                <rect key="frame" x="14" y="580" width="290" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="DSv-mw-0BS" eventType="valueChanged" id="pTX-Kp-Xnp"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQ9-L4-P6l">
+                                <rect key="frame" x="310" y="584.5" width="49" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="wCB-2s-3Xf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZt-45-3Sj" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="108" width="343" height="464"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oxS-Dd-adN">
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Pressure"/>
+                                    <segment title="Altitude"/>
+                                    <segment title="Temperature"/>
+                                </segments>
+                                <connections>
+                                    <action selector="dataSegmentChanged:" destination="DSv-mw-0BS" eventType="valueChanged" id="U3k-ye-ky9"/>
+                                </connections>
+                            </segmentedControl>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="i2l-di-M0t">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="RcC-GB-qXv"/>
+                                    <constraint firstAttribute="height" constant="20" id="swe-m1-mFI"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OQ9-L4-P6l" firstAttribute="centerY" secondItem="BV6-no-SoF" secondAttribute="centerY" id="6Lh-dW-JXC"/>
+                            <constraint firstItem="i2l-di-M0t" firstAttribute="centerX" secondItem="jHz-JT-GRT" secondAttribute="centerX" id="T0I-wW-Mm0"/>
+                            <constraint firstItem="OQ9-L4-P6l" firstAttribute="leading" secondItem="BV6-no-SoF" secondAttribute="trailing" constant="8" id="U7V-Qo-zek"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OQ9-L4-P6l" secondAttribute="trailing" id="ZnE-uU-ztD"/>
+                            <constraint firstItem="BV6-no-SoF" firstAttribute="leading" secondItem="jHz-JT-GRT" secondAttribute="leadingMargin" id="lR5-yh-Rcm"/>
+                            <constraint firstItem="i2l-di-M0t" firstAttribute="centerY" secondItem="jHz-JT-GRT" secondAttribute="centerY" id="sfY-3y-lr5"/>
+                            <constraint firstItem="Jpg-45-ZFR" firstAttribute="top" secondItem="BV6-no-SoF" secondAttribute="bottom" constant="8" id="tVQ-Xy-uaO"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="i2l-di-M0t" id="f67-zo-hl5"/>
+                        <outlet property="chartView" destination="KZt-45-3Sj" id="Pbj-t3-YzY"/>
+                        <outlet property="dataSegment" destination="oxS-Dd-adN" id="dBH-TS-jVV"/>
+                        <outlet property="slider" destination="BV6-no-SoF" id="N93-m7-W6s"/>
+                        <outlet property="sliderLabel" destination="OQ9-L4-P6l" id="WsB-uD-C0g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYF-hk-z18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3258" y="70"/>
+            <point key="canvasLocation" x="3256.8000000000002" y="69.715142428785612"/>
         </scene>
         <!--Colour-->
         <scene sceneID="Gwr-Cd-J1I">
@@ -579,7 +652,7 @@
         <scene sceneID="HXd-0D-N4K">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xxU-mm-5f8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Pressure" id="uDn-0C-Vxa"/>
+                    <tabBarItem key="tabBarItem" title="Pressure" image="meter" id="uDn-0C-Vxa"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ddq-t9-SyS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -597,7 +670,7 @@
         <!--Settings-->
         <scene sceneID="xTj-IG-MMQ">
             <objects>
-                <tableViewController id="CNh-Kh-wJJ" sceneMemberID="viewController">
+                <tableViewController id="CNh-Kh-wJJ" customClass="MainSettingTableViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="9zB-ZI-SAX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -629,6 +702,9 @@
                                                         <segment title="℉"/>
                                                         <segment title="K"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="temperatureUnitChanged:" destination="CNh-Kh-wJJ" eventType="valueChanged" id="9DR-cG-ohf"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -659,8 +735,11 @@
                                                     </constraints>
                                                     <segments>
                                                         <segment title="hPa"/>
-                                                        <segment title="Pa"/>
+                                                        <segment title="kPa"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="pressureUnitChanged:" destination="CNh-Kh-wJJ" eventType="valueChanged" id="37y-qn-FXF"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -693,6 +772,9 @@
                                                         <segment title="m"/>
                                                         <segment title="feet"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="altitudeUnitChanged:" destination="CNh-Kh-wJJ" eventType="valueChanged" id="jzY-eZ-bXJ"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -809,6 +891,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="1Yg-aA-O98"/>
+                    <connections>
+                        <outlet property="altitudeUnitSegment" destination="BaT-tR-d96" id="nsv-95-VEK"/>
+                        <outlet property="pressureUnitSegment" destination="fhf-bX-mkg" id="ZXb-Zz-7RD"/>
+                        <outlet property="temperatureUnitSegment" destination="jGn-xq-GDY" id="Kg4-cD-ijk"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dqN-q7-j6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -817,7 +904,7 @@
         <!--Temperature Alarm-->
         <scene sceneID="e47-mh-mAy">
             <objects>
-                <tableViewController title="Temperature Alarm" id="ml8-rk-Vqy" sceneMemberID="viewController">
+                <tableViewController title="Temperature Alarm" id="ml8-rk-Vqy" customClass="TemperatureAlarmSettingTableViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="9lq-33-J7G">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -835,6 +922,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYx-Mh-NHd">
                                                     <rect key="frame" x="318" y="7" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="temperatureAlarmOnChanged:" destination="ml8-rk-Vqy" eventType="valueChanged" id="oY5-Wv-izc"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoI-zT-2Me">
                                                     <rect key="frame" x="8" y="12" width="23" height="21"/>
@@ -858,8 +948,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When higher than" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkl-ga-7Tv">
-                                                    <rect key="frame" x="8" y="11" width="137" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exceeds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkl-ga-7Tv">
+                                                    <rect key="frame" x="8" y="11" width="65" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -871,7 +961,10 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <action selector="higherThanChanged:" destination="ml8-rk-Vqy" eventType="editingChanged" id="44C-yw-sg2"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="℃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wh4-KC-hhh">
                                                     <rect key="frame" x="337" y="12" width="30" height="21"/>
@@ -900,8 +993,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When lower than" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLi-0Y-jsI">
-                                                    <rect key="frame" x="8" y="12" width="129" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drops to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLi-0Y-jsI">
+                                                    <rect key="frame" x="8" y="12" width="66" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -913,7 +1006,10 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                    <connections>
+                                                        <action selector="lowerThanChanged:" destination="ml8-rk-Vqy" eventType="editingChanged" id="4EK-vj-BNW"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="℃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76a-Li-hzm">
                                                     <rect key="frame" x="337" y="12" width="30" height="21"/>
@@ -943,15 +1039,22 @@
                             <outlet property="delegate" destination="ml8-rk-Vqy" id="Ube-oK-7sa"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="higherThanField" destination="eyf-cD-uae" id="J7o-ny-XVp"/>
+                        <outlet property="higherThanUnitLabel" destination="Wh4-KC-hhh" id="MP1-ja-s9H"/>
+                        <outlet property="lowerThanField" destination="1SV-IM-5nC" id="js1-oD-IVZ"/>
+                        <outlet property="lowerThanUnitLabel" destination="76a-Li-hzm" id="13J-gY-YGX"/>
+                        <outlet property="temperatureAlarmOnSwitch" destination="OYx-Mh-NHd" id="FZy-G7-eFM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Emf-N3-U9h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3254" y="782"/>
+            <point key="canvasLocation" x="3253.5999999999999" y="781.25937031484261"/>
         </scene>
         <!--Pressure Alarm-->
         <scene sceneID="TK0-6I-OWj">
             <objects>
-                <tableViewController title="Pressure Alarm" id="SC9-PX-XIF" sceneMemberID="viewController">
+                <tableViewController title="Pressure Alarm" id="SC9-PX-XIF" customClass="PressureAlarmSettingTableViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="cYI-zi-PEP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -976,6 +1079,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mtc-Su-ZTN">
                                                     <rect key="frame" x="318" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="pressureAlarmOnChanged:" destination="SC9-PX-XIF" eventType="valueChanged" id="LXN-v1-ITI"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -991,8 +1097,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When lower than" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTn-oJ-L05">
-                                                    <rect key="frame" x="8" y="11" width="129" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drops to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTn-oJ-L05">
+                                                    <rect key="frame" x="8" y="11" width="66" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1013,7 +1119,10 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="lowerThanChanged:" destination="SC9-PX-XIF" eventType="editingChanged" id="QHb-eF-pgw"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1034,6 +1143,11 @@
                             <outlet property="delegate" destination="SC9-PX-XIF" id="lxN-Ju-GpK"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="lowerThanField" destination="v4y-n7-BSh" id="tdt-uO-Kvt"/>
+                        <outlet property="lowerThanUnitLabel" destination="ht1-wk-6na" id="vut-QS-uV8"/>
+                        <outlet property="pressureAlarmOnSwitch" destination="Mtc-Su-ZTN" id="4nY-51-4so"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMO-RV-OHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1042,7 +1156,7 @@
         <!--Altitude Alarm-->
         <scene sceneID="dvp-S0-3JG">
             <objects>
-                <tableViewController title="Altitude Alarm" id="YJj-uk-pf3" sceneMemberID="viewController">
+                <tableViewController title="Altitude Alarm" id="YJj-uk-pf3" customClass="AltitudeAlarmSettingTableViewController" customModule="raspberry_and_sensors" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="zp5-Al-1jb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1066,6 +1180,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqx-65-CFh">
                                                     <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="altitudeAlarmOnChanged:" destination="YJj-uk-pf3" eventType="valueChanged" id="972-rb-j9Y"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1083,8 +1200,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When higher than" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAJ-hr-G1K">
-                                                    <rect key="frame" x="8" y="11" width="137" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exceeds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAJ-hr-G1K">
+                                                    <rect key="frame" x="8" y="11" width="65" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1105,7 +1222,10 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="higherThanChanged:" destination="YJj-uk-pf3" eventType="editingChanged" id="U8g-Ii-aGw"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1126,6 +1246,11 @@
                             <outlet property="delegate" destination="YJj-uk-pf3" id="fFs-bQ-Qle"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="altitudeAlarmOnSwitch" destination="cqx-65-CFh" id="LTj-ZY-CL5"/>
+                        <outlet property="higherThanField" destination="u6j-vW-2yW" id="G2T-Vf-GpJ"/>
+                        <outlet property="higherThanUnitLabel" destination="3dr-OZ-E8b" id="Df1-Sb-sVx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MlM-6w-OXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1135,7 +1260,7 @@
         <scene sceneID="cpR-sf-KS4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PGj-AG-KNj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="TQy-zt-iig"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="TQy-zt-iig"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y7k-hv-JeU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1152,6 +1277,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="meter" width="32" height="32"/>
+        <image name="settings" width="32" height="32"/>
         <image name="brightness" width="804" height="4"/>
         <image name="hue" width="698" height="1"/>
         <image name="saturation" width="195" height="2"/>
