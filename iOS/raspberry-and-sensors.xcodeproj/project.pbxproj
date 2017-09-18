@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1843C2581F6A0363006D3A65 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843C2571F6A0363006D3A65 /* ColorViewController.swift */; };
 		658F51231F67970100266768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51221F67970100266768 /* AppDelegate.swift */; };
 		658F51251F67970100266768 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51241F67970100266768 /* MainViewController.swift */; };
 		658F51281F67970100266768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658F51261F67970100266768 /* Main.storyboard */; };
@@ -21,7 +22,7 @@
 		65917AE71F67CB86003FF669 /* Pressure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE31F67CB86003FF669 /* Pressure+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* PressureSensor.swift */; };
 		65917AEE1F67FAEC003FF669 /* PressureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AED1F67FAEC003FF669 /* PressureViewController.swift */; };
-		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
+		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		072C01304176A3A1F92D761D /* Pods-raspberry-and-sensors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.release.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.release.xcconfig"; sourceTree = "<group>"; };
+		1843C2571F6A0363006D3A65 /* ColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_raspberry_and_sensors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		658F511F1F67970100266768 /* raspberry-and-sensors.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "raspberry-and-sensors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658F51221F67970100266768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		65917AEC1F67FAC2003FF669 /* Colour */ = {
 			isa = PBXGroup;
 			children = (
+				1843C2571F6A0363006D3A65 /* ColorViewController.swift */,
 			);
 			name = Colour;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				658F51231F67970100266768 /* AppDelegate.swift in Sources */,
 				65917AE91F67CCA1003FF669 /* PressureSensor.swift in Sources */,
 				65917AE61F67CB86003FF669 /* Pressure+CoreDataClass.swift in Sources */,
+				1843C2581F6A0363006D3A65 /* ColorViewController.swift in Sources */,
 				65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
