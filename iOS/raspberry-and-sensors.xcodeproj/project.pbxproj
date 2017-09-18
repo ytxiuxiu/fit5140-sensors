@@ -14,6 +14,7 @@
 		6523FBA81F6FF41000662D26 /* PressureAlarmSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523FBA71F6FF41000662D26 /* PressureAlarmSettingTableViewController.swift */; };
 		6547AA5B1F6E957A00A9B7F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6547AA5A1F6E957A00A9B7F8 /* Assets.xcassets */; };
 		6547AA5D1F6E9DAA00A9B7F8 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547AA5C1F6E9DAA00A9B7F8 /* Alarm.swift */; };
+		1843C2581F6A0363006D3A65 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843C2571F6A0363006D3A65 /* ColorViewController.swift */; };
 		658F51231F67970100266768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51221F67970100266768 /* AppDelegate.swift */; };
 		658F51251F67970100266768 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51241F67970100266768 /* MainViewController.swift */; };
 		658F51281F67970100266768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658F51261F67970100266768 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		65F172A51F6AAC85000DAE2F /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F172A41F6AAC85000DAE2F /* Setting.swift */; };
 		65F172A91F6ABC2B000DAE2F /* MainSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F172A81F6ABC2B000DAE2F /* MainSettingTableViewController.swift */; };
 		9C73DEDB4407BE7059BF737D /* Pods_raspberry_and_sensors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		072C01304176A3A1F92D761D /* Pods-raspberry-and-sensors.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-raspberry-and-sensors.release.xcconfig"; path = "Pods/Target Support Files/Pods-raspberry-and-sensors/Pods-raspberry-and-sensors.release.xcconfig"; sourceTree = "<group>"; };
+		1843C2571F6A0363006D3A65 /* ColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		235B8E4EF41DA9CD6E356642 /* Pods_raspberry_and_sensors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_raspberry_and_sensors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6523FB9F1F6FE89000662D26 /* ColourSense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColourSense.swift; path = Entities/ColourSense.swift; sourceTree = "<group>"; };
 		6523FBA11F6FEDE700662D26 /* MeterHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeterHistoryViewController.swift; path = Meters/MeterHistoryViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +199,7 @@
 		65917AEC1F67FAC2003FF669 /* Colour */ = {
 			isa = PBXGroup;
 			children = (
+				1843C2571F6A0363006D3A65 /* ColorViewController.swift */,
 			);
 			name = Colour;
 			sourceTree = "<group>";
@@ -407,6 +411,7 @@
 				65917AE91F67CCA1003FF669 /* MeterSense.swift in Sources */,
 				65CD76DA1F6BCE9A002EA795 /* DoubleExtension.swift in Sources */,
 				6523FBA61F6FEEF100662D26 /* AltitudeAlarmSettingTableViewController.swift in Sources */,
+				1843C2581F6A0363006D3A65 /* ColorViewController.swift in Sources */,
 				65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
