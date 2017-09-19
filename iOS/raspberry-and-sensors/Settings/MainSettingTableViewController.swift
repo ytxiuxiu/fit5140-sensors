@@ -75,6 +75,7 @@ class MainSettingTableViewController: UITableViewController {
     // Temperature unit changed, it should change the setting
     @IBAction func temperatureUnitChanged(_ sender: Any) {
         
+        // ✴️ Attributes:
         // StackOverflow: ios - Array from dictionary keys in swift - Stack Overflow
         //      https://stackoverflow.com/questions/26386093/array-from-dictionary-keys-in-swift
         

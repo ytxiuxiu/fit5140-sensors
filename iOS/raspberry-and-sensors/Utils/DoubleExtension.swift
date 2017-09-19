@@ -55,6 +55,7 @@ extension Double {
      */
     var celsius: Double {
         get {
+            // ✴️ Attributes:
             // Website: Kelvin to Celsius formula
             //      http://www.rapidtables.com/convert/temperature/how-kelvin-to-celsius.htm
             
@@ -78,6 +79,7 @@ extension Double {
      */
     var fahrenheit: Double {
         get {
+            // ✴️ Attributes:
             // Website: Kelvin to Fahrenheit formula
             //      http://www.rapidtables.com/convert/temperature/how-kelvin-to-fahrenheit.htm
             
@@ -173,6 +175,7 @@ extension Double {
      */
     var feet: Double {
         get {
+            // ✴️ Attributes:
             // Website: Meters to Feets conversion
             //      http://www.rapidtables.com/convert/length/meter-to-feet.htm
             

@@ -15,6 +15,7 @@ extension UIViewController {
      */
     func disableBackButton() {
         
+        // ✴️ Attributes:
         // StackOverflow: ios - How to disable back button in navigation bar - Stack Overflow
         //      https://stackoverflow.com/questions/32010429/how-to-disable-back-button-in-navigation-bar
         

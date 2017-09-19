@@ -47,7 +47,7 @@ class ColourViewController: UIViewController {
     
     let mqtt = MQTT.shared
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -68,7 +68,7 @@ class ColourViewController: UIViewController {
                 self.kLabel.text = "\(k.simplify(decimal: 3))"
                 
                 let (h, s, l) = self.rgbToHsl(r: sense.r, g: sense.g, b: sense.b)
-                self.hLabel.text = "\(h.simplify(decimal: 1))"
+                self.hLabel.text = "\(h.simplify(decimal: 0))"
                 self.sLabel.text = "\((s * 100).simplify(decimal: 0))%"
                 self.lLabel.text = "\((l * 100).simplify(decimal: 0))%"
                 
@@ -80,7 +80,7 @@ class ColourViewController: UIViewController {
         
         super.viewWillAppear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,11 +91,26 @@ class ColourViewController: UIViewController {
         
         mqtt.removeColourMonitor(key: "colourViewController")
     }
-
     
+    // Mark: - Color RGB-CMYK Convertor
+    
+    // ✴️ Attribute:
     // Website: RGB to CMYK color conversion
     //      http://www.rapidtables.com/convert/color/rgb-to-cmyk.htm
     
+    /**
+     Convert  RGB to CMYK
+     
+     - Parameters:
+     - r: Red
+     - g: Green
+     - b: Blue
+     - Returns:
+     - c: Cyan
+     - m: Magenta
+     - y: Yellow
+     - k: Black
+     */
     func rgbToCmyk(r: Double, g: Double, b: Double) -> (c: Double, m: Double, y: Double, k: Double) {
         let _r = r / 255
         let _g = g / 255
@@ -108,6 +123,25 @@ class ColourViewController: UIViewController {
         return (c, m, y, k)
     }
     
+    // Mark: - Color RGB-SHL Convertor
+    
+    // ✴️ Attribute:
+    // Website: How to Convert RGB to HUE in Swift
+    //      https://medium.com/simple-swift-programming-tips/how-to-convert-rgb-to-hue-in-swift-1d25338cad28
+    
+    /**
+     Convert  RGB to CMYK
+     
+     - Parameters:
+     - r: Red
+     - g: Green
+     - b: Blue
+     - Returns:
+     - s: saturation
+     - h: hue
+     - l: lightness
+     
+     */
     func rgbToHsl(r: Double, g: Double, b: Double) -> (h: Double, s: Double, l: Double){
         
         let _r = r / 255
@@ -146,5 +180,5 @@ class ColourViewController: UIViewController {
         return (h * 360, s, l)
         
     }
-
+    
 }

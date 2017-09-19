@@ -40,6 +40,7 @@ class MeterHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ✴️ Attributes:
         // StackOverflow: ios - iPhone : How to detect the end of slider drag? - Stack Overflow
         //      https://stackoverflow.com/questions/9390298/iphone-how-to-detect-the-end-of-slider-drag
         
@@ -139,6 +140,7 @@ class MeterHistoryViewController: UIViewController {
             data.addDataSet(line)
             self.chartView.data = data
             
+            // ✴️ Attributes:
             // StackOverflow: xcode - Using threads to update UI with Swift - Stack Overflow
             //      https://stackoverflow.com/questions/27212254/using-threads-to-update-ui-with-swift
             

@@ -15,6 +15,7 @@ extension UITextField {
      */
     func showError() {
         
+        // ✴️ Attributes:
         // StackOverflow: ios - How set swift 3 UITextField border color ? - Stack Overflow
         //      https://stackoverflow.com/questions/38460327/how-set-swift-3-uitextfield-border-color
         
