@@ -14,6 +14,10 @@ extension Double {
         return String(format: "%.1f", self)
     }
     
+    func simplify(decimal: Int) -> String {
+        return String(format: "%.\(decimal)f", self)
+    }
+    
     func toCurrentTemperatureUnit() -> Double {
         let setting = Setting.shared
         

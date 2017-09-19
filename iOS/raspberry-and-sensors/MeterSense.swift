@@ -20,6 +20,7 @@ class MeterSense: NSObject {
     
     var altimeter: Double?
     
+    
     override init() {
         
     }

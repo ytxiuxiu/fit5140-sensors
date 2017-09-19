@@ -430,7 +430,7 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle" translatesAutoresizingMaskIntoConstraints="NO" id="ZYC-hj-qIQ">
-                                                <rect key="frame" x="0.0" y="11" width="16" height="16"/>
+                                                <rect key="frame" x="-8" y="11" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="LR7-Ej-SrK"/>
                                                     <constraint firstAttribute="height" constant="16" id="ZoL-xS-71X"/>
@@ -438,7 +438,7 @@
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="ZYC-hj-qIQ" firstAttribute="leading" secondItem="QCc-o0-0pY" secondAttribute="leading" id="8OM-Nz-8us"/>
+                                            <constraint firstItem="ZYC-hj-qIQ" firstAttribute="leading" secondItem="QCc-o0-0pY" secondAttribute="leading" constant="-8" id="8OM-Nz-8us"/>
                                             <constraint firstItem="ZYC-hj-qIQ" firstAttribute="top" secondItem="nuT-Te-8Tu" secondAttribute="bottom" constant="-1" id="Ja8-5f-Z1q"/>
                                             <constraint firstItem="nuT-Te-8Tu" firstAttribute="leading" secondItem="QCc-o0-0pY" secondAttribute="leading" id="R6q-SU-bLb"/>
                                             <constraint firstItem="nuT-Te-8Tu" firstAttribute="top" secondItem="QCc-o0-0pY" secondAttribute="top" id="ag8-eI-bxS"/>
@@ -472,7 +472,7 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle" translatesAutoresizingMaskIntoConstraints="NO" id="cDe-FX-dko">
-                                                <rect key="frame" x="0.0" y="11" width="16" height="16"/>
+                                                <rect key="frame" x="-8" y="11" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="Gfn-zF-kzP"/>
                                                     <constraint firstAttribute="height" constant="16" id="p8h-X1-YNP"/>
@@ -480,7 +480,7 @@
                                             </imageView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="cDe-FX-dko" firstAttribute="leading" secondItem="fP1-ZA-NRv" secondAttribute="leading" id="P3l-5Q-oXf"/>
+                                            <constraint firstItem="cDe-FX-dko" firstAttribute="leading" secondItem="fP1-ZA-NRv" secondAttribute="leading" constant="-8" id="P3l-5Q-oXf"/>
                                             <constraint firstItem="02O-IR-mWZ" firstAttribute="leading" secondItem="fP1-ZA-NRv" secondAttribute="leading" id="Yjr-Yj-JMi"/>
                                             <constraint firstItem="02O-IR-mWZ" firstAttribute="top" secondItem="fP1-ZA-NRv" secondAttribute="top" id="gIX-VB-nv7"/>
                                             <constraint firstAttribute="trailing" secondItem="02O-IR-mWZ" secondAttribute="trailing" id="sXE-EW-I9c"/>
@@ -509,7 +509,7 @@
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle" translatesAutoresizingMaskIntoConstraints="NO" id="upX-h5-fyk">
-                                                <rect key="frame" x="0.0" y="11" width="16" height="16"/>
+                                                <rect key="frame" x="-8" y="11" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="9Lk-lW-opV"/>
                                                     <constraint firstAttribute="width" constant="16" id="S0i-aO-Mhl"/>
@@ -521,7 +521,7 @@
                                             <constraint firstAttribute="trailing" secondItem="WwJ-ZT-BUx" secondAttribute="trailing" id="Mh3-aJ-qTp"/>
                                             <constraint firstItem="WwJ-ZT-BUx" firstAttribute="top" secondItem="zh8-8P-OeC" secondAttribute="top" id="u1X-KY-WKv"/>
                                             <constraint firstItem="WwJ-ZT-BUx" firstAttribute="leading" secondItem="zh8-8P-OeC" secondAttribute="leading" id="wTl-4N-KSz"/>
-                                            <constraint firstItem="upX-h5-fyk" firstAttribute="leading" secondItem="zh8-8P-OeC" secondAttribute="leading" id="wtu-gI-SwR"/>
+                                            <constraint firstItem="upX-h5-fyk" firstAttribute="leading" secondItem="zh8-8P-OeC" secondAttribute="leading" constant="-8" id="wtu-gI-SwR"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="37%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHm-dB-jKe">
@@ -587,6 +587,25 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bLabel" destination="9t8-JN-nKW" id="pfx-A1-0aA"/>
+                        <outlet property="cLabel" destination="Uj4-z2-bpq" id="ZKM-nM-Uc2"/>
+                        <outlet property="colourView" destination="0jl-h8-lUv" id="2nB-M2-QBt"/>
+                        <outlet property="gLabel" destination="ZPD-7w-ebv" id="0ht-b6-laR"/>
+                        <outlet property="hIndicatorLeft" destination="8OM-Nz-8us" id="KmL-V7-NnK"/>
+                        <outlet property="hLabel" destination="jjD-3f-RSw" id="4Xi-HI-EWX"/>
+                        <outlet property="hView" destination="QCc-o0-0pY" id="dlb-sV-ow3"/>
+                        <outlet property="kLabel" destination="9AY-0s-s4z" id="a5n-3I-Zjd"/>
+                        <outlet property="lIndicatorLeft" destination="wtu-gI-SwR" id="bbz-cy-ukB"/>
+                        <outlet property="lLabel" destination="UHm-dB-jKe" id="zep-5A-7T2"/>
+                        <outlet property="lView" destination="zh8-8P-OeC" id="ctu-16-aSn"/>
+                        <outlet property="mLabel" destination="rZQ-jf-DLv" id="EAv-fS-xyI"/>
+                        <outlet property="rLabel" destination="0ai-My-sEM" id="6Kw-1U-V49"/>
+                        <outlet property="sIndicatorLeft" destination="P3l-5Q-oXf" id="Gro-ya-T6J"/>
+                        <outlet property="sLabel" destination="dvP-ub-h5g" id="QVG-rB-Tm6"/>
+                        <outlet property="sView" destination="fP1-ZA-NRv" id="3al-N6-IoZ"/>
+                        <outlet property="yLabel" destination="ccP-jC-f2E" id="0sg-MM-i16"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aKs-kk-Cux" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

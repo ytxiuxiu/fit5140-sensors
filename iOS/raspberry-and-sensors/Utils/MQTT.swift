@@ -18,9 +18,11 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
     static let topicMeters = "meters"
     
+    static let topicColour = "colour"
+    
     var client: CocoaMQTT?
     
-//    var colourMonitors = [String: (pressure: Colour) -> Void]()
+    var colourCallbacks = [String: (sense: ColourSense) -> Void]()
     
     var meterCallbacks = [String: (sense: MeterSense) -> Void]()
     
@@ -31,8 +33,8 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         print("MQTT init")
         
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
-//        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
-        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
+        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
+//        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
@@ -42,6 +44,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         self.client?.subscribe(MQTT.topicMeters)
+        self.client?.subscribe(MQTT.topicColour)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -66,10 +69,21 @@ class MQTT: NSObject, CocoaMQTTDelegate {
                     let barometer = info[MeterSense.values.barometer] as! Double
                     let altimeter = info[MeterSense.values.altimeter] as! Double
                     
-                    let pressure = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
+                    let meter = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
 
                     for (_, callback) in self.meterCallbacks {
-                        callback(pressure)
+                        callback(meter)
+                    }
+                } else if message.topic == MQTT.topicColour {
+                    // 65535 to 255
+                    let r = (info[ColourSense.values.r] as! Double) / 257
+                    let g = (info[ColourSense.values.g] as! Double) / 257
+                    let b = (info[ColourSense.values.b] as! Double) / 257
+                    
+                    let colour = ColourSense(r: r, g: g, b: b)
+                    
+                    for (_, callback) in self.colourCallbacks {
+                        callback(colour)
                     }
                 }
                 
@@ -102,15 +116,15 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         }
     }
     
-    //    func addColourMonitor(key: String, callback: @escaping (_ sensor: ColourSensor) -> Void) {
-    //        self.colourMonitors[key] = callback;
-    //    }
-    //
-    //    func removeColourMonitor(key: String) {
-    //        self.colourMonitors.removeValue(forKey: key)
-    //    }
+    func addColourMonitor(key: String, callback: @escaping (_ sense: ColourSense) -> Void) {
+        self.colourCallbacks[key] = callback;
+    }
+
+    func removeColourMonitor(key: String) {
+        self.colourCallbacks.removeValue(forKey: key)
+    }
     
-    func addMeterMonitor(key: String, callback: @escaping (_ sensor: MeterSense) -> Void) {
+    func addMeterMonitor(key: String, callback: @escaping (_ sense: MeterSense) -> Void) {
         self.meterCallbacks[key] = callback;
     }
     

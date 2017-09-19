@@ -22,7 +22,8 @@ class HTTP: NSObject {
     
     static let shared = HTTP()
 
-    static let baseUrl = "http://192.168.0.6/history/"
+//    static let baseUrl = "http://192.168.0.6/history/"
+    static let baseUrl = "http://192.168.43.154/history/"
     
     
     func getHistory(sensor: String, value: String, limit: Int, callback: @escaping (_ error: Error?, _ senses: [Any]?) -> Void) {
