@@ -10,6 +10,9 @@ import UIKit
 
 extension UIViewController {
     
+    /**
+     Disable the back button
+     */
     func disableBackButton() {
         
         // StackOverflow: ios - How to disable back button in navigation bar - Stack Overflow
@@ -19,6 +22,9 @@ extension UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.lightGray
     }
     
+    /**
+     Enable the back button
+     */
     func enableBackButton() {
         navigationController?.navigationBar.isUserInteractionEnabled = true
         navigationController?.navigationBar.tintColor = UIColor.blue

@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ Temperature Alarm Setting Table View Controller
+ */
 class TemperatureAlarmSettingTableViewController: UITableViewController {
     
     @IBOutlet weak var temperatureAlarmOnSwitch: UISwitch!
@@ -39,6 +43,10 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         alarm.pauseTemperatureAlarm = true
     }
     
+    
+    /**
+     Update UI from the setting
+     */
     func updateSetting() {
         temperatureAlarmOnSwitch.setOn(setting.temperatureAlarmOn, animated: false)
         
@@ -68,6 +76,9 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         alarm.pauseTemperatureAlarm = false
     }
     
+    /**
+     Update UI according to the alarm is enabled or not
+     */
     func updateEnabled() {
         if !temperatureAlarmOnSwitch.isOn {
             lowerThanField.isEnabled = false
@@ -85,12 +96,14 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         }
     }
     
+    // Temperature alram on switch changed
     @IBAction func temperatureAlarmOnChanged(_ sender: Any) {
         setting.temperatureAlarmOn = temperatureAlarmOnSwitch.isOn
         
         updateEnabled()
     }
     
+    // Lower than changed (each character)
     @IBAction func lowerThanChanged(_ sender: Any) {
         setting.temperatureAlarmLowerThan = Double(lowerThanField.text!)
         
@@ -106,11 +119,13 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         updateLowerThanError()
     }
     
+    /**
+     Update lower than error
+     */
     func updateLowerThanError() {
         if let lowerThan = lowerThanField.text {
             if lowerThan.isNumber {
                 lowerThanField.hideError()
-                
                 enableBackButton()
             } else {
                 lowerThanField.showError()
@@ -119,6 +134,7 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         }
     }
     
+    // Higher than changed (each character)
     @IBAction func higherThanChanged(_ sender: Any) {
         setting.temperatureAlarmHigherThan = Double(higherThanField.text!)
         
@@ -134,11 +150,13 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
         updateHigherThanError()
     }
     
+    /**
+     Update higher than error
+     */
     func updateHigherThanError() {
         if let higherThan = higherThanField.text {
             if higherThan.isNumber {
                 higherThanField.hideError()
-                
                 enableBackButton()
             } else {
                 higherThanField.showError()

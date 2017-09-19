@@ -14,6 +14,10 @@
 import UIKit
 import Charts
 
+
+/**
+ Meter History View Controller
+ */
 class MeterHistoryViewController: UIViewController {
 
     @IBOutlet weak var chartView: LineChartView!
@@ -41,6 +45,7 @@ class MeterHistoryViewController: UIViewController {
         
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
 
+        // global setting for the chart
         chartView.noDataText = "No data"
         chartView.chartDescription?.enabled = false
     }
@@ -56,6 +61,9 @@ class MeterHistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+     Update the chart according to selected sensor (in the segment) and the specific number of data (in the slider)
+     */
     func updateChart() {
         activityIndicator.isHidden = false
         chartView.isHidden = true
@@ -142,14 +150,17 @@ class MeterHistoryViewController: UIViewController {
         }
     }
     
+    // Slider value changed
     @IBAction func sliderValueChanged(_ sender: Any) {
         sliderLabel.text = String(Int(slider.value))
     }
     
+    // Slider end sliding
     func sliderDidEndSliding() {
         updateChart()
     }
     
+    // Segment changed
     @IBAction func dataSegmentChanged(_ sender: Any) {
         updateChart()
     }

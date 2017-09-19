@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ Altitude Alarm Setting Table View Controller
+ */
 class AltitudeAlarmSettingTableViewController: UITableViewController {
 
     @IBOutlet weak var altitudeAlarmOnSwitch: UISwitch!
@@ -35,6 +39,9 @@ class AltitudeAlarmSettingTableViewController: UITableViewController {
         alarm.pauseAltitudeAlarm = true
     }
     
+    /**
+     Update UI from the setting
+     */
     func updateSetting() {
         altitudeAlarmOnSwitch.setOn(setting.altitudeAlarmOn, animated: false)
         
@@ -61,6 +68,9 @@ class AltitudeAlarmSettingTableViewController: UITableViewController {
         alarm.pauseAltitudeAlarm = false
     }
     
+    /**
+     Update UI according to the alarm is enabled or not
+     */
     func updateEnabled() {
         if !altitudeAlarmOnSwitch.isOn {
             higherThanField.isEnabled = false
@@ -74,12 +84,14 @@ class AltitudeAlarmSettingTableViewController: UITableViewController {
         }
     }
     
+    // Altitude alram on switch changed
     @IBAction func altitudeAlarmOnChanged(_ sender: Any) {
         setting.altitudeAlarmOn = altitudeAlarmOnSwitch.isOn
         
         updateEnabled()
     }
 
+    // Higher than changed (each character)
     @IBAction func higherThanChanged(_ sender: Any) {
         setting.altitudeAlarmHigherThan = Double(higherThanField.text!)
         
@@ -93,11 +105,13 @@ class AltitudeAlarmSettingTableViewController: UITableViewController {
         updateHigherThanError()
     }
     
+    /**
+     Update higher than error
+     */
     func updateHigherThanError() {
         if let higherThan = higherThanField.text {
             if higherThan.isNumber {
                 higherThanField.hideError()
-                
                 enableBackButton()
             } else {
                 higherThanField.showError()

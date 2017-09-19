@@ -18,12 +18,9 @@
 		658F51231F67970100266768 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51221F67970100266768 /* AppDelegate.swift */; };
 		658F51251F67970100266768 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F51241F67970100266768 /* MainViewController.swift */; };
 		658F51281F67970100266768 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658F51261F67970100266768 /* Main.storyboard */; };
-		658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 658F51291F67970100266768 /* raspberry_and_sensors.xcdatamodeld */; };
 		658F51301F67970100266768 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658F512E1F67970100266768 /* LaunchScreen.storyboard */; };
 		658F513B1F67970100266768 /* raspberry_and_sensorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658F513A1F67970100266768 /* raspberry_and_sensorsTests.swift */; };
 		65917ADD1F67ADF3003FF669 /* MQTT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917ADC1F67ADF3003FF669 /* MQTT.swift */; };
-		65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */; };
-		65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */; };
 		65917AE91F67CCA1003FF669 /* MeterSense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65917AE81F67CCA1003FF669 /* MeterSense.swift */; };
 		65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */; };
 		65CD76DA1F6BCE9A002EA795 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */; };
@@ -61,15 +58,12 @@
 		658F51221F67970100266768 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		658F51241F67970100266768 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		658F51271F67970100266768 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		658F512A1F67970100266768 /* raspberry_and_sensors.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = raspberry_and_sensors.xcdatamodel; sourceTree = "<group>"; };
 		658F512F1F67970100266768 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		658F51311F67970100266768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658F51361F67970100266768 /* raspberry-and-sensorsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "raspberry-and-sensorsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		658F513A1F67970100266768 /* raspberry_and_sensorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = raspberry_and_sensorsTests.swift; sourceTree = "<group>"; };
 		658F513C1F67970100266768 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65917ADC1F67ADF3003FF669 /* MQTT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MQTT.swift; path = Utils/MQTT.swift; sourceTree = "<group>"; };
-		65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataClass.swift"; path = "Entities/Colour+CoreDataClass.swift"; sourceTree = "<group>"; };
-		65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Colour+CoreDataProperties.swift"; path = "Entities/Colour+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		65917AE81F67CCA1003FF669 /* MeterSense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterSense.swift; sourceTree = "<group>"; };
 		65CD76D71F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemperatureAlarmSettingTableViewController.swift; path = Settings/TemperatureAlarmSettingTableViewController.swift; sourceTree = "<group>"; };
 		65CD76D91F6BCE9A002EA795 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Utils/DoubleExtension.swift; sourceTree = "<group>"; };
@@ -135,7 +129,6 @@
 				658F51261F67970100266768 /* Main.storyboard */,
 				658F512E1F67970100266768 /* LaunchScreen.storyboard */,
 				658F51311F67970100266768 /* Info.plist */,
-				658F51291F67970100266768 /* raspberry_and_sensors.xcdatamodeld */,
 				6547AA5C1F6E9DAA00A9B7F8 /* Alarm.swift */,
 			);
 			path = "raspberry-and-sensors";
@@ -166,8 +159,6 @@
 		65917ADF1F67C7A6003FF669 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				65917AE01F67CB86003FF669 /* Colour+CoreDataClass.swift */,
-				65917AE11F67CB86003FF669 /* Colour+CoreDataProperties.swift */,
 				65917AE81F67CCA1003FF669 /* MeterSense.swift */,
 				6523FB9F1F6FE89000662D26 /* ColourSense.swift */,
 			);
@@ -394,13 +385,10 @@
 				65CD76DC1F6BE087002EA795 /* UIViewControllerExtension.swift in Sources */,
 				658F51251F67970100266768 /* MainViewController.swift in Sources */,
 				6523FBA41F6FEDE700662D26 /* MeterViewController.swift in Sources */,
-				65917AE51F67CB86003FF669 /* Colour+CoreDataProperties.swift in Sources */,
 				65CD76D81F6BC9AF002EA795 /* TemperatureAlarmSettingTableViewController.swift in Sources */,
-				65917AE41F67CB86003FF669 /* Colour+CoreDataClass.swift in Sources */,
 				6523FBA81F6FF41000662D26 /* PressureAlarmSettingTableViewController.swift in Sources */,
 				6523FBA31F6FEDE700662D26 /* MeterHistoryViewController.swift in Sources */,
 				6547AA5D1F6E9DAA00A9B7F8 /* Alarm.swift in Sources */,
-				658F512B1F67970100266768 /* raspberry_and_sensors.xcdatamodeld in Sources */,
 				6523FBA01F6FE89000662D26 /* ColourSense.swift in Sources */,
 				65CD76E01F6C0C81002EA795 /* StringExtension.swift in Sources */,
 				65CD76E41F6CCD01002EA795 /* HTTP.swift in Sources */,
@@ -639,19 +627,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		658F51291F67970100266768 /* raspberry_and_sensors.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				658F512A1F67970100266768 /* raspberry_and_sensors.xcdatamodel */,
-			);
-			currentVersion = 658F512A1F67970100266768 /* raspberry_and_sensors.xcdatamodel */;
-			path = raspberry_and_sensors.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 658F51171F67970100266768 /* Project object */;
 }

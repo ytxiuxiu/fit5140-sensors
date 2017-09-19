@@ -10,6 +10,11 @@ import UIKit
 
 extension String {
     
+    /**
+     Check if the string is a number
+    
+     - Returns: If the string is a number or not
+     */
     var isNumber: Bool {
         get {
             // StackOverflow: swift - How to check is a string or number - Stack Overflow

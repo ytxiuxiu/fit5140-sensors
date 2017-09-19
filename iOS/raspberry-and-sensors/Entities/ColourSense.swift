@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ One sense of colour
+ */
 class ColourSense: NSObject {
 
     static let values = (r: "r", g: "g", b: "b")

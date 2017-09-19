@@ -91,6 +91,7 @@ class ColourViewController: UIViewController {
         
         mqtt.removeColourMonitor(key: "colourViewController")
     }
+
     
     // Website: RGB to CMYK color conversion
     //      http://www.rapidtables.com/convert/color/rgb-to-cmyk.htm

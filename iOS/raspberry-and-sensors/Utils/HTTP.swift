@@ -18,14 +18,26 @@ enum HTTPError: Error {
 }
 
 
+/**
+ HTTP
+ */
 class HTTP: NSObject {
     
     static let shared = HTTP()
 
-//    static let baseUrl = "http://192.168.0.6/history/"
-    static let baseUrl = "http://192.168.43.154/history/"
+    static let baseUrl = "http://192.168.0.6/history/"
+//    static let baseUrl = "http://192.168.43.154/history/"
     
     
+    /**
+     Get history data from the server
+ 
+     - Parameters:
+        - sensor: Sensor's name
+        - value: Which value of the sensor (eg. barometer)
+        - limit: How many hisotry data
+        - callback: Callback function
+     */
     func getHistory(sensor: String, value: String, limit: Int, callback: @escaping (_ error: Error?, _ senses: [Any]?) -> Void) {
         let url = URL(string: "\(HTTP.baseUrl)\(sensor)/\(value)/\(limit)")!
         

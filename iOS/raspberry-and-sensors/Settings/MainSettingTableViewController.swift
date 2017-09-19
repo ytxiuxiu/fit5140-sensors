@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ Main Setting Table View Controller
+ */
 class MainSettingTableViewController: UITableViewController {
     
     @IBOutlet weak var temperatureUnitSegment: UISegmentedControl!
@@ -15,6 +19,7 @@ class MainSettingTableViewController: UITableViewController {
     @IBOutlet weak var pressureUnitSegment: UISegmentedControl!
     
     @IBOutlet weak var altitudeUnitSegment: UISegmentedControl!
+    
     
     let temperatureUnitToSegmentSelection = [Setting.temperatureUnits.c: 0, Setting.temperatureUnits.f: 1, Setting.temperatureUnits.k: 2]
     
@@ -53,6 +58,10 @@ class MainSettingTableViewController: UITableViewController {
         updateSetting()
     }
     
+    
+    /**
+     Update segment from settings
+     */
     func updateSetting() {
         temperatureUnitSegment.selectedSegmentIndex = temperatureUnitToSegmentSelection[setting.temperatureUnit]!
         pressureUnitSegment.selectedSegmentIndex = pressureUnitToSegmentSelection[setting.pressureUnit]!
@@ -63,6 +72,7 @@ class MainSettingTableViewController: UITableViewController {
         setting.save()
     }
     
+    // Temperature unit changed, it should change the setting
     @IBAction func temperatureUnitChanged(_ sender: Any) {
         
         // StackOverflow: ios - Array from dictionary keys in swift - Stack Overflow
@@ -72,11 +82,13 @@ class MainSettingTableViewController: UITableViewController {
         setting.temperatureUnit = temperatureSegmentSelectionToUnit[selected]
     }
     
+    // Pressure unit changed, it should change the setting
     @IBAction func pressureUnitChanged(_ sender: Any) {
         let selected = pressureUnitSegment.selectedSegmentIndex
         setting.pressureUnit = pressureSegmentSelectionToUnit[selected]
     }
     
+    // Altitude unit changed, it should change the setting
     @IBAction func altitudeUnitChanged(_ sender: Any) {
         let selected = altitudeUnitSegment.selectedSegmentIndex
         setting.altitudeUnit = altitudeSegmentSelectionToUnit[selected]

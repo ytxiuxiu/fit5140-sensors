@@ -75,8 +75,6 @@ mqtt.on('connect', () => {
         b: res.b
       };
 
-      console.log(data)
-
       mqtt.publish('colour', JSON.stringify(data));
     });
   });

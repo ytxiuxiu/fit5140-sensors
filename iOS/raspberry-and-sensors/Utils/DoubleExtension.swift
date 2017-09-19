@@ -10,14 +10,32 @@ import UIKit
 
 extension Double {
     
+    /**
+     Convert to simplified string with 1 decimal point
+     
+     - Returns: String format
+     */
     func simplify() -> String {
         return String(format: "%.1f", self)
     }
     
+    /**
+     Convert to simplified string with a specific decimal number
+     
+     - Parameters:
+        - decimal: Number of decimal points
+     
+     - Returns: String format
+     */
     func simplify(decimal: Int) -> String {
         return String(format: "%.\(decimal)f", self)
     }
     
+    /**
+     Convert to current temperature unit
+    
+     - Returns: Data in current temperature unit
+     */
     func toCurrentTemperatureUnit() -> Double {
         let setting = Setting.shared
         
@@ -30,6 +48,11 @@ extension Double {
         }
     }
     
+    /**
+     Get celsius
+     
+     - Returns: Temperature in celsius
+     */
     var celsius: Double {
         get {
             // Website: Kelvin to Celsius formula
@@ -39,10 +62,20 @@ extension Double {
         }
     }
     
+    /**
+     Convert from celsius to kelvin
+     
+     - Returns: Temperature in kelvin
+     */
     func celsiusToKelvin() -> Double {
         return self + 273.15
     }
     
+    /**
+     Get fahrenheit
+     
+     - Returns: Temperature in fahrenheit
+     */
     var fahrenheit: Double {
         get {
             // Website: Kelvin to Fahrenheit formula
@@ -52,10 +85,20 @@ extension Double {
         }
     }
     
+    /**
+     Convert from fahrenheit to kelvin
+     
+     - Returns: Temperature in kelvin
+     */
     func fahrenheitToKelvin() -> Double {
         return (self + 459.67) * 5 / 9
     }
     
+    /**
+     Get pressure in current pressure unit according to the settings
+    
+     - Returns: Pressure in current unit
+     */
     func toCurrentPressureUnit() -> Double {
         let setting = Setting.shared
         
@@ -66,22 +109,42 @@ extension Double {
         }
     }
     
+    /**
+     Get kPa
+     
+     - Returns: Pressure in kPa
+     */
     var kPa: Double {
         get {
             return self
         }
     }
     
+    /**
+     Get hPa
+     
+     - Returns: Pressure in hPa
+     */
     var hPa: Double {
         get {
             return self * 10
         }
     }
     
+    /**
+     Convert from hPa to kPa
+     
+     - Returns: Pressure in kPa
+     */
     func hPaToKPa() -> Double {
         return self / 10
     }
     
+    /**
+     Get altitude in current altitude unit according to the settings
+     
+     - Returns: Altitude in current unit
+     */
     func toCurrentAltitudeUnit() -> Double {
         let setting = Setting.shared
         
@@ -92,12 +155,22 @@ extension Double {
         }
     }
     
+    /**
+     Get meters
+     
+     - Returns: Altitude in meters
+     */
     var meters: Double {
         get {
             return self
         }
     }
     
+    /**
+     Get feet
+     
+     - Returns: Altitude in feet
+     */
     var feet: Double {
         get {
             // Website: Meters to Feets conversion
@@ -107,6 +180,11 @@ extension Double {
         }
     }
     
+    /**
+     Convert from feet to meters
+     
+     - Returns: Temperature in meters
+     */
     func feetToMeters() -> Double {
         return self * 0.3048
     }

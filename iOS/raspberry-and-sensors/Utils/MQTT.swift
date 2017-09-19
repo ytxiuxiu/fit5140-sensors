@@ -12,6 +12,10 @@
 import UIKit
 import CocoaMQTT
 
+
+/**
+ MQTT
+ */
 class MQTT: NSObject, CocoaMQTTDelegate {
     
     static let shared = MQTT()
@@ -30,11 +34,13 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     override init() {
         super.init()
         
-        print("MQTT init")
-        
+        connect()
+    }
+    
+    func connect() {
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
-        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
-//        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
+        //        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
+        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
@@ -94,7 +100,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
-        print("didSubscribeTopic: \(topic)")
+        print("subscribed topic: \(topic)")
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
@@ -110,24 +116,54 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        print("mqttDidDisconnect")
+        print("mqtt disconnected")
+        
         if let error = err {
             print(error)
         }
+        
+        // try to reconnect
+        connect()
     }
     
+    /**
+     Add a colour monotor
+ 
+     - Parameters:
+        - key: Key for the monitor
+        - callback: The callback function being called when the data has changed
+     */
     func addColourMonitor(key: String, callback: @escaping (_ sense: ColourSense) -> Void) {
         self.colourCallbacks[key] = callback;
     }
 
+    /**
+     Remove a colour monitor
+    
+     - Parameters:
+        - key: Key for the monitor
+     */
     func removeColourMonitor(key: String) {
         self.colourCallbacks.removeValue(forKey: key)
     }
     
+    /**
+     Add a meter monotor
+     
+     - Parameters:
+        - key: Key for the monitor
+        - callback: The callback function being called when the data has changed
+     */
     func addMeterMonitor(key: String, callback: @escaping (_ sense: MeterSense) -> Void) {
         self.meterCallbacks[key] = callback;
     }
     
+    /**
+     Remove a meter monitor
+     
+     - Parameters:
+        - key: Key for the monitor
+     */
     func removeMeterMonitor(key: String) {
         self.meterCallbacks.removeValue(forKey: key)
     }
