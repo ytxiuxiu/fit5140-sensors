@@ -9,19 +9,78 @@
 import UIKit
 import CocoaMQTT
 
+
+/**
+ Ring View for displaying data
+ */
+class RingView: UIView {
+    
+    var min: Double?
+    
+    var max: Double?
+    
+    var data: Double?
+    
+
+    override func draw(_ rect: CGRect) {
+        
+        // ✴️ Attributes:
+        // Website: Drawing Shapes Using Bézier Paths
+        //      https://developer.apple.com/library/content/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/BezierPaths/BezierPaths.html
+        // StackOverflow: How to get the screen width and height in iOS?
+        //      https://stackoverflow.com/questions/5677716/how-to-get-the-screen-width-and-height-in-ios
+        // swift - How to draw an animated path with multiple colors in ios? - Stack Overflow
+        //      https://stackoverflow.com/questions/30737923/how-to-draw-an-animated-path-with-multiple-colors-in-ios
+        // UIBezierPath Stroke (and Fill) in Swift - Stack Overflow
+        //      https://stackoverflow.com/questions/24843516/uibezierpath-stroke-and-fill-in-swift
+        
+        if let min = min, let max = max, let data = data {
+            let viewWidth = self.frame.width
+            let viewHeight = self.frame.height
+            
+            let lineWidth = UIScreen.main.bounds.size.width / 40.0
+            let startAngle = -CGFloat.pi * 13.0 / 12.0
+            let backgroundEndAngle = CGFloat.pi * 1.0 / 12.0
+            let dataEndAngle = CGFloat((data - min) / (max - min)) * (backgroundEndAngle - startAngle) + startAngle
+            let center = CGPoint(x: viewWidth / 2.0, y: viewHeight * 3.0 / 4.0)
+            
+
+            let backgroundPath = UIBezierPath()
+            backgroundPath.addArc(withCenter: center, radius: viewWidth / 4.0, startAngle: startAngle, endAngle: backgroundEndAngle, clockwise: true)
+            backgroundPath.lineWidth = lineWidth
+            backgroundPath.lineCapStyle = .round
+            
+            let dataPath = UIBezierPath()
+            dataPath.addArc(withCenter: center, radius: viewWidth / 4.0, startAngle: startAngle, endAngle: dataEndAngle, clockwise: true)
+            dataPath.lineWidth = lineWidth
+            dataPath.lineCapStyle = .round
+            
+            UIColor(red: 235.0/255, green: 235.0/255, blue: 235.0/255, alpha: 1.0).setStroke()
+            backgroundPath.stroke()
+            
+            UIColor(red: 38.0/255, green: 166.0/255, blue: 91.0/255, alpha: 1.0).setStroke()
+            dataPath.stroke()
+        }
+    }
+    
+}
+
+/**
+ Meter View Controller
+ */
 class MeterViewController: UIViewController {
 
     @IBOutlet weak var pressureLabel: UILabel!
     
-    @IBOutlet weak var pressureView: UIView!
+    @IBOutlet weak var pressureView: RingView!
     
     @IBOutlet weak var altitudeLabel: UILabel!
     
-    @IBOutlet weak var altitudeView: UIView!
+    @IBOutlet weak var altitudeView: RingView!
     
     @IBOutlet weak var temperatureLabel: UILabel!
     
-    @IBOutlet weak var temperatureView: UIView!
+    @IBOutlet weak var temperatureView: RingView!
     
     @IBOutlet weak var meterView: UIView!
     
@@ -67,6 +126,17 @@ class MeterViewController: UIViewController {
         meterView.isHidden = true
         activityIndicator.isHidden = false
         
+        initRing()
+        fetchFirstData()
+        listenToSensors()
+
+        super.viewWillAppear(animated)
+    }
+    
+    /**
+     Initial rings for all sensors
+     */
+    func initRing() {
         let pressureMinDefault = 30.0
         let pressureMaxDefault = 120.0
         let altitudeMinDefault = 0.0
@@ -77,19 +147,23 @@ class MeterViewController: UIViewController {
         // convet
         pressureMin = pressureMinDefault.toCurrentPressureUnit()
         pressureMax = pressureMaxDefault.toCurrentPressureUnit()
-
+        
         altitudeMin = altitudeMinDefault.toCurrentAltitudeUnit()
         altitudeMax = altitudeMaxDefault.toCurrentAltitudeUnit()
-
+        
         temperatureMin = temperatureMinDefault.toCurrentTemperatureUnit()
         temperatureMax = temperatureMaxDefault.toCurrentTemperatureUnit()
         
         // draw init
-        self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: pressureMin, max: pressureMax, data: pressureMin)
-        self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: altitudeMin)
-        self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: temperatureMin)
-        
-        // fetch current data or use last data if available
+        self.drawDataRing(view: self.pressureView, min: pressureMin, max: pressureMax, data: pressureMin)
+        self.drawDataRing(view: self.altitudeView, min: altitudeMin, max: altitudeMax, data: altitudeMin)
+        self.drawDataRing(view: self.temperatureView, min: temperatureMin, max: temperatureMax, data: temperatureMin)
+    }
+    
+    /** 
+     Fetch current data or use last data if available
+     */
+    func fetchFirstData() {
         if let lastPressure = lastPressure {
             let pressureData = self.processPressureData(pressure: lastPressure)
             self.showPressure(data: pressureData)
@@ -100,6 +174,9 @@ class MeterViewController: UIViewController {
             http.getHistory(sensor: MeterSense.sensor, value: "\(MeterSense.values.thermometer),\(MeterSense.values.barometer),\(MeterSense.values.altimeter)", limit: 1, callback: { (error, senses) in
                 guard error == nil else {
                     print("Cannot get current data from the server \(error!)")
+                    
+                    self.alert(title: "Failed to get meter data", message: "\(error!)")
+                    
                     return
                 }
                 
@@ -134,13 +211,11 @@ class MeterViewController: UIViewController {
             let temperatureData = self.processTemperatureData(temperature: lastTemperature)
             self.showTemperature(data: temperatureData)
         }
-        
-        // listen to sensor changes
-        listenToSensors()
-
-        super.viewWillAppear(animated)
     }
     
+    /**
+     Listen to sensors on mqtt
+     */
     func listenToSensors() {
         self.mqtt.addMeterMonitor(key: "meterViewController", callback: { (sensor) in
             if let pressure = sensor.barometer {
@@ -180,6 +255,12 @@ class MeterViewController: UIViewController {
         temperatureLabel.text = "-.-"
     }
     
+    
+    // MARK: - Data Processing and Showing
+    
+    /**
+     Process pressure data so that it is within specific range
+     */
     func processPressureData(pressure: Double) -> Double {
         self.lastPressure = pressure
         var pressureData = pressure.toCurrentPressureUnit()
@@ -191,13 +272,22 @@ class MeterViewController: UIViewController {
         return pressureData
     }
     
+    /**
+     Show pressure data on both ring and label
+     
+     - Parameters:
+        - data: Pressure data
+     */
     func showPressure(data: Double) {
         DispatchQueue.main.async() {
-            self.drawDataRing(dataLayer: &self.pressureLayer, view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: data)
+            self.drawDataRing(view: self.pressureView, min: self.pressureMin, max: self.pressureMax, data: data)
             self.pressureLabel.text = "\(data.simplify())\(self.setting.getPressureUnitSymbol())"
         }
     }
     
+    /**
+     Process altitude data so that it is within specific range
+     */
     func processAltitudeData(altitude: Double) -> Double {
         self.lastAltitude = altitude
         var altitudeData = altitude.toCurrentAltitudeUnit()
@@ -208,13 +298,22 @@ class MeterViewController: UIViewController {
         return altitudeData
     }
     
+    /**
+     Show altitude data on both ring and label
+     
+     - Parameters:
+        - data: Altitude data
+     */
     func showAltitude(data: Double) {
         DispatchQueue.main.async() {
-            self.drawDataRing(dataLayer: &self.altitudeLayer, view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: data)
+            self.drawDataRing(view: self.altitudeView, min: self.altitudeMin, max: self.altitudeMax, data: data)
             self.altitudeLabel.text = "\(data.simplify())\(self.setting.getAltitudeUnitSymbol())"
         }
     }
     
+    /**
+     Process temperature data so that it is within specific range
+     */
     func processTemperatureData(temperature: Double) -> Double {
         self.lastTemperature = temperature
         var temperatureData = temperature.toCurrentTemperatureUnit()
@@ -225,56 +324,33 @@ class MeterViewController: UIViewController {
         return temperatureData
     }
     
+    /**
+     Show temperature data on both ring and label
+     
+     - Parameters:
+        - data: Temperature data
+     */
     func showTemperature(data: Double) {
         DispatchQueue.main.async() {
-            self.drawDataRing(dataLayer: &self.temperatureLayer, view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: data)
+            self.drawDataRing(view: self.temperatureView, min: self.temperatureMin, max: self.temperatureMax, data: data)
             self.temperatureLabel.text = "\(data.simplify())\(self.setting.getTemperatureUnitSymbol())"
         }
     }
     
-    func drawDataRing(dataLayer: inout CAShapeLayer?, view: UIView, min: Double, max: Double, data: Double) {
-        
-        // ✴️ Attributes:
-        // Website: Drawing Shapes Using Bézier Paths
-        //      https://developer.apple.com/library/content/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/BezierPaths/BezierPaths.html
-        // StackOverflow: How to get the screen width and height in iOS?
-        //      https://stackoverflow.com/questions/5677716/how-to-get-the-screen-width-and-height-in-ios
-        
-        let lineWidth = UIScreen.main.bounds.size.width / 40.0
-        let startAngle = -CGFloat.pi * 13.0 / 12.0
-        let backgroundEndAngle = CGFloat.pi * 1.0 / 12.0
-        let dataEndAngle = CGFloat((data - min) / (max - min)) * (backgroundEndAngle - startAngle) + startAngle
-        let center = CGPoint(x: view.frame.width / 2.0, y: view.frame.height * 3.0 / 4.0)
-        
-        if dataLayer == nil {
-            // draw background
-            let backgroundPath = UIBezierPath()
-            backgroundPath.addArc(withCenter: center, radius: view.frame.width / 4.0, startAngle: startAngle, endAngle: backgroundEndAngle, clockwise: true)
-            
-            let backgroundLayer = CAShapeLayer()
-            backgroundLayer.fillColor = nil
-            backgroundLayer.lineCap = kCALineCapRound
-            backgroundLayer.strokeColor = UIColor(red: 235.0/255, green: 235.0/255, blue: 235.0/255, alpha: 1.0).cgColor
-            backgroundLayer.lineWidth = lineWidth
-            backgroundLayer.path = backgroundPath.cgPath
-            
-            view.layer.addSublayer(backgroundLayer)
-        } else {
-            dataLayer?.removeFromSuperlayer()
-        }
-        
-        let dataPath = UIBezierPath()
-        dataPath.addArc(withCenter: center, radius: view.frame.width / 4.0, startAngle: startAngle, endAngle: dataEndAngle, clockwise: true)
-        
-        dataLayer = CAShapeLayer()
-        dataLayer?.fillColor = nil
-        dataLayer?.lineCap = kCALineCapRound
-        dataLayer?.strokeColor = UIColor(red: 38.0/255, green: 166.0/255, blue: 91.0/255, alpha: 1.0).cgColor
-        dataLayer?.lineWidth = lineWidth
-        
-        dataLayer?.path = dataPath.cgPath
-        dataPath.addArc(withCenter: center, radius: view.frame.width / 4.0, startAngle: startAngle, endAngle: dataEndAngle, clockwise: true)
-        view.layer.addSublayer(dataLayer!)
+    /**
+     Draw data on the ring
+    
+     - Parameters:
+        - view: View of the ring
+        - min: Minimum value of the ring
+        - max: Max value of the ring
+        - data: Sensor data
+     */
+    func drawDataRing(view: RingView, min: Double, max: Double, data: Double) {
+        view.max = max
+        view.min = min
+        view.data = data
+        view.setNeedsDisplay()
     }
 
 }

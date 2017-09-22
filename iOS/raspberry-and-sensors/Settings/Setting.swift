@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ Setting, for storing user settings
+ */
 class Setting: NSObject {
     
     static let shared = Setting()
@@ -47,7 +51,7 @@ class Setting: NSObject {
         super.init()
         
         if preferences.object(forKey: keys.inited) == nil {
-            // init default settings
+            // first time, init default settings
             preferences.set(true, forKey: keys.inited)
             
             temperatureAlarmHigherThan = 299.15 // 26℃
@@ -59,6 +63,7 @@ class Setting: NSObject {
             
             self.save()
         } else {
+            // otherwise, retrieve settings
             pressureUnit = preferences.string(forKey: keys.pressureUnit)!
             altitudeUnit = preferences.string(forKey: keys.altitudeUnit)!
             temperatureUnit = preferences.string(forKey: keys.temperatureUnit)!
@@ -75,6 +80,10 @@ class Setting: NSObject {
         }
     }
     
+    
+    /**
+     Persistent the settings
+     */
     func save() {
         preferences.set(pressureUnit, forKey: keys.pressureUnit)
         preferences.set(altitudeUnit, forKey: keys.altitudeUnit)
@@ -97,6 +106,12 @@ class Setting: NSObject {
         }
     }
     
+    
+    // MARK: - Units
+    
+    /**
+     Get current temperature unit symbol according to the setting
+     */
     func getTemperatureUnitSymbol() -> String {
         switch temperatureUnit {
         case Setting.temperatureUnits.c:
@@ -110,6 +125,9 @@ class Setting: NSObject {
         }
     }
     
+    /**
+     Get pressure temperature unit symbol according to the setting
+     */
     func getPressureUnitSymbol() -> String {
         switch pressureUnit {
         case Setting.pressureUnits.hPa:
@@ -121,6 +139,9 @@ class Setting: NSObject {
         }
     }
     
+    /**
+     Get current altitude unit symbol according to the setting
+     */
     func getAltitudeUnitSymbol() -> String {
         switch altitudeUnit {
         case Setting.altitudeUnits.m:

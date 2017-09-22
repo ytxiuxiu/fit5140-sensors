@@ -10,6 +10,10 @@ import UIKit
 import UserNotifications
 import Whisper
 
+
+/**
+ Alarm
+ */
 class Alarm: NSObject {
     
     static let shared = Alarm()
@@ -45,6 +49,10 @@ class Alarm: NSObject {
         })
     }
     
+    
+    /**
+     Monitor the meters sensor
+     */
     func monitorMeters() {
         MQTT.shared.addMeterMonitor(key: "alarm") { (sense) in
             self.monitorTemperature(sense: sense)
@@ -53,6 +61,12 @@ class Alarm: NSObject {
         }
     }
     
+    /**
+     Monitor temperature
+     
+     - Parameters:
+        - sense: A sense of meter
+     */
     func monitorTemperature(sense: MeterSense) {
         if self.setting.temperatureAlarmOn && !self.pauseTemperatureAlarm {
             
@@ -94,6 +108,12 @@ class Alarm: NSObject {
         }
     }
     
+    /**
+     Monitor altitude
+     
+     - Parameters:
+     - sense: A sense of meter
+     */
     func monitorAltitude(sense: MeterSense) {
         if self.setting.altitudeAlarmOn && !self.pauseAltitudeAlarm {
             
@@ -117,6 +137,12 @@ class Alarm: NSObject {
         }
     }
     
+    /**
+     Monitor pressure
+     
+     - Parameters:
+     - sense: A sense of meter
+     */
     func monitorPressure(sense: MeterSense) {
         if self.setting.pressureAlarmOn && !self.pausePressureAlarm {
             
@@ -140,6 +166,14 @@ class Alarm: NSObject {
         }
     }
     
+    /**
+     Notify the user
+     
+     - Parameters:
+        - title: Title of the notification
+        - message: Message on the notification
+        - identifier: Identifier of the notification
+     */
     func notify(title: String, message: String, identifier: String) {
         
         // ✴️ Attributes:

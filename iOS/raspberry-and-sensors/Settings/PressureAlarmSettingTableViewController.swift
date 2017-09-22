@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ Pressure Alarm Setting Table View Controller
+ */
 class PressureAlarmSettingTableViewController: UITableViewController {
     
     @IBOutlet weak var pressureAlarmOnSwitch: UISwitch!
@@ -35,6 +39,9 @@ class PressureAlarmSettingTableViewController: UITableViewController {
         alarm.pausePressureAlarm = true
     }
     
+    /**
+     Update UI from the setting
+     */
     func updateSetting() {
         pressureAlarmOnSwitch.setOn(setting.pressureAlarmOn, animated: false)
         
@@ -61,6 +68,9 @@ class PressureAlarmSettingTableViewController: UITableViewController {
         alarm.pausePressureAlarm = false
     }
     
+    /**
+     Update UI according to the alarm is enabled or not
+     */
     func updateEnabled() {
         if !pressureAlarmOnSwitch.isOn {
             lowerThanField.isEnabled = false
@@ -74,12 +84,14 @@ class PressureAlarmSettingTableViewController: UITableViewController {
         }
     }
     
+    // Pressure alram on switch changed
     @IBAction func pressureAlarmOnChanged(_ sender: Any) {
         setting.pressureAlarmOn = pressureAlarmOnSwitch.isOn
         
         updateEnabled()
     }
     
+    // Lower than changed (each character)
     @IBAction func lowerThanChanged(_ sender: Any) {
         setting.pressureAlarmLowerThan = Double(lowerThanField.text!)
         
@@ -93,11 +105,13 @@ class PressureAlarmSettingTableViewController: UITableViewController {
         updateLowerThanError()
     }
     
+    /**
+     Update lower than error
+     */
     func updateLowerThanError() {
         if let lowerThan = lowerThanField.text {
             if lowerThan.isNumber {
                 lowerThanField.hideError()
-                
                 enableBackButton()
             } else {
                 lowerThanField.showError()

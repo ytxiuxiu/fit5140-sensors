@@ -7,6 +7,7 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../db');
+const sensors = require('../sensors');
 
 router.get('/history/:sensor/:value/:limit', (req, res, next) => {
   const fields = { time: 1 };
@@ -15,19 +16,37 @@ router.get('/history/:sensor/:value/:limit', (req, res, next) => {
   });
   const limit = parseInt(req.params.limit);
 
-  db.get(req.params.sensor).find({}, { 
-    fields,
-    sort: { time: -1 },
-    limit
-  })
-  .then((docs) => {
+  if (req.params.sensor === 'colour') {
+    const data = {};
+    if (fields.hasOwnProperty('r')) {
+      data.r = sensors.getLastRgb().r;
+    }
+    if (fields.hasOwnProperty('g')) {
+      data.g = sensors.getLastRgb().g;
+    }
+    if (fields.hasOwnProperty('b')) {
+      data.b = sensors.getLastRgb().b;
+    }
+    data.time = sensors.getLastRgb().time;
+
     res.json({
-      senses: docs.reverse()
+      senses: [data]
     });
-  })
-  .catch((err) => {
-    next(err);
-  });
+  } else {
+    db.get(req.params.sensor).find({}, { 
+      fields,
+      sort: { time: -1 },
+      limit
+    })
+    .then((docs) => {
+      res.json({
+        senses: docs.reverse()
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+  }
 });
 
 module.exports = router;

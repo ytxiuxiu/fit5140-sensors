@@ -19,7 +19,8 @@ const rgbCallbacks = [];
 const lastRgb = {
   r: undefined,
   g: undefined,
-  b: undefined
+  b: undefined,
+  time: undefined
 };
 
 const getSensors = (callback) => {
@@ -56,6 +57,7 @@ const getSensors = (callback) => {
             lastRgb.r = res.r;
             lastRgb.g = res.g;
             lastRgb.b = res.b;
+            lastRgb.time = new Date();
           });
         }, rgbInfo.freq);
 
@@ -120,5 +122,6 @@ const onRgb = (event, callabck) => {
 };
 
 module.exports = {
-  getSensors
+  getSensors,
+  getLastRgb: () => lastRgb
 };

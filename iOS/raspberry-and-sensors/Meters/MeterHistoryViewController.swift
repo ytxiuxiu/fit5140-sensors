@@ -14,6 +14,10 @@
 import UIKit
 import Charts
 
+
+/**
+ Meter History View Controller
+ */
 class MeterHistoryViewController: UIViewController {
 
     @IBOutlet weak var chartView: LineChartView!
@@ -36,11 +40,13 @@ class MeterHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ✴️ Attributes:
         // StackOverflow: ios - iPhone : How to detect the end of slider drag? - Stack Overflow
         //      https://stackoverflow.com/questions/9390298/iphone-how-to-detect-the-end-of-slider-drag
         
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
 
+        // global setting for the chart
         chartView.noDataText = "No data"
         chartView.chartDescription?.enabled = false
     }
@@ -56,6 +62,9 @@ class MeterHistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+     Update the chart according to selected sensor (in the segment) and the specific number of data (in the slider)
+     */
     func updateChart() {
         activityIndicator.isHidden = false
         chartView.isHidden = true
@@ -66,9 +75,7 @@ class MeterHistoryViewController: UIViewController {
             guard error == nil else {
                 print("Failed to get pressure history \(error!)")
                 
-                let alert = UIAlertController(title: "Failed to get history data", message: "\(error!)", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self.alert(title: "Failed to get history data", message: "\(error!)")
                 
                 let data = LineChartData()
                 self.chartView.data = data
@@ -131,6 +138,7 @@ class MeterHistoryViewController: UIViewController {
             data.addDataSet(line)
             self.chartView.data = data
             
+            // ✴️ Attributes:
             // StackOverflow: xcode - Using threads to update UI with Swift - Stack Overflow
             //      https://stackoverflow.com/questions/27212254/using-threads-to-update-ui-with-swift
             
@@ -142,14 +150,17 @@ class MeterHistoryViewController: UIViewController {
         }
     }
     
+    // Slider value changed
     @IBAction func sliderValueChanged(_ sender: Any) {
         sliderLabel.text = String(Int(slider.value))
     }
     
+    // Slider end sliding
     func sliderDidEndSliding() {
         updateChart()
     }
     
+    // Segment changed
     @IBAction func dataSegmentChanged(_ sender: Any) {
         updateChart()
     }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+/**
+ One sense of meters
+ */
 class MeterSense: NSObject {
     
     static let sensor = "meters"
@@ -19,6 +23,7 @@ class MeterSense: NSObject {
     var barometer: Double?
     
     var altimeter: Double?
+    
     
     override init() {
         

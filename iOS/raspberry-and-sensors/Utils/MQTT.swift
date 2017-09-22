@@ -11,16 +11,23 @@
 
 import UIKit
 import CocoaMQTT
+import Whisper
 
+
+/**
+ MQTT
+ */
 class MQTT: NSObject, CocoaMQTTDelegate {
     
     static let shared = MQTT()
     
     static let topicMeters = "meters"
     
+    static let topicColour = "colour"
+    
     var client: CocoaMQTT?
     
-//    var colourMonitors = [String: (pressure: Colour) -> Void]()
+    var colourCallbacks = [String: (sense: ColourSense) -> Void]()
     
     var meterCallbacks = [String: (sense: MeterSense) -> Void]()
     
@@ -28,11 +35,13 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     override init() {
         super.init()
         
-        print("MQTT init")
-        
+        connect()
+    }
+    
+    func connect() {
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
-//        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
-        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
+        //        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
+        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.102", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
@@ -42,6 +51,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         self.client?.subscribe(MQTT.topicMeters)
+        self.client?.subscribe(MQTT.topicColour)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -66,10 +76,21 @@ class MQTT: NSObject, CocoaMQTTDelegate {
                     let barometer = info[MeterSense.values.barometer] as! Double
                     let altimeter = info[MeterSense.values.altimeter] as! Double
                     
-                    let pressure = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
+                    let meter = MeterSense(thermometer: thermometer, barometer: barometer, altimeter: altimeter)
 
                     for (_, callback) in self.meterCallbacks {
-                        callback(pressure)
+                        callback(meter)
+                    }
+                } else if message.topic == MQTT.topicColour {
+                    // 65536 to 256
+                    let r = (info[ColourSense.values.r] as! Double) / 256
+                    let g = (info[ColourSense.values.g] as! Double) / 256
+                    let b = (info[ColourSense.values.b] as! Double) / 256
+                    
+                    let colour = ColourSense(r: r, g: g, b: b)
+                    
+                    for (_, callback) in self.colourCallbacks {
+                        callback(colour)
                     }
                 }
                 
@@ -80,7 +101,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topic: String) {
-        print("didSubscribeTopic: \(topic)")
+        print("subscribed topic: \(topic)")
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
@@ -96,24 +117,55 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        print("mqttDidDisconnect")
+        print("mqtt disconnected")
+        
         if let error = err {
             print(error)
+            
+            let murmur = Murmur(title: "Lost connection with MQTT server")
+            Whisper.show(whistle: murmur, action: .show(5))
         }
+        
     }
     
-    //    func addColourMonitor(key: String, callback: @escaping (_ sensor: ColourSensor) -> Void) {
-    //        self.colourMonitors[key] = callback;
-    //    }
-    //
-    //    func removeColourMonitor(key: String) {
-    //        self.colourMonitors.removeValue(forKey: key)
-    //    }
+    /**
+     Add a colour monotor
+ 
+     - Parameters:
+        - key: Key for the monitor
+        - callback: The callback function being called when the data has changed
+     */
+    func addColourMonitor(key: String, callback: @escaping (_ sense: ColourSense) -> Void) {
+        self.colourCallbacks[key] = callback;
+    }
+
+    /**
+     Remove a colour monitor
     
-    func addMeterMonitor(key: String, callback: @escaping (_ sensor: MeterSense) -> Void) {
+     - Parameters:
+        - key: Key for the monitor
+     */
+    func removeColourMonitor(key: String) {
+        self.colourCallbacks.removeValue(forKey: key)
+    }
+    
+    /**
+     Add a meter monotor
+     
+     - Parameters:
+        - key: Key for the monitor
+        - callback: The callback function being called when the data has changed
+     */
+    func addMeterMonitor(key: String, callback: @escaping (_ sense: MeterSense) -> Void) {
         self.meterCallbacks[key] = callback;
     }
     
+    /**
+     Remove a meter monitor
+     
+     - Parameters:
+        - key: Key for the monitor
+     */
     func removeMeterMonitor(key: String) {
         self.meterCallbacks.removeValue(forKey: key)
     }
