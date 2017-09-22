@@ -44,8 +44,14 @@ class ColourViewController: UIViewController {
     
     @IBOutlet weak var lIndicatorLeft: NSLayoutConstraint!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     let mqtt = MQTT.shared
+    
+    let http = HTTP.shared
+    
+    var lastSense: ColourSense?
     
     
     override func viewDidLoad() {
@@ -53,32 +59,71 @@ class ColourViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        fetchFirstData()
+        
         mqtt.addColourMonitor(key: "colourViewController") { (sense) in
             DispatchQueue.main.async() {
-                self.colourView.backgroundColor = UIColor(red: CGFloat(sense.r / 255.0), green: CGFloat(sense.g / 255.0), blue: CGFloat(sense.b / 255.0), alpha: 1.0)
+                self.showColour(sense: sense)
                 
-                self.rLabel.text = "\(sense.r.simplify(decimal: 0))"
-                self.gLabel.text = "\(sense.g.simplify(decimal: 0))"
-                self.bLabel.text = "\(sense.b.simplify(decimal: 0))"
-                
-                let (c, m, y, k) = self.rgbToCmyk(r: sense.r, g: sense.g, b: sense.b)
-                self.cLabel.text = "\(c.simplify(decimal: 3))"
-                self.mLabel.text = "\(m.simplify(decimal: 3))"
-                self.yLabel.text = "\(y.simplify(decimal: 3))"
-                self.kLabel.text = "\(k.simplify(decimal: 3))"
-                
-                let (h, s, l) = self.rgbToHsl(r: sense.r, g: sense.g, b: sense.b)
-                self.hLabel.text = "\(h.simplify(decimal: 0))"
-                self.sLabel.text = "\((s * 100).simplify(decimal: 0))%"
-                self.lLabel.text = "\((l * 100).simplify(decimal: 0))%"
-                
-                self.hIndicatorLeft.constant = self.hView.frame.width * CGFloat(h) / 255 - 8
-                self.sIndicatorLeft.constant = self.sView.frame.width * CGFloat(s) / 1 - 8
-                self.lIndicatorLeft.constant = self.lView.frame.width * CGFloat(l) / 1 - 8
+                self.activityIndicator.isHidden = true
             }
         }
         
         super.viewWillAppear(animated)
+    }
+    
+    func showColour(sense: ColourSense) {
+        if let r = sense.r, let g = sense.g, let b = sense.b {
+            self.colourView.backgroundColor = UIColor(red: CGFloat(r / 255.0), green: CGFloat(g / 255.0), blue: CGFloat(b / 255.0), alpha: 1.0)
+            
+            self.rLabel.text = "\(r.simplify(decimal: 0))"
+            self.gLabel.text = "\(g.simplify(decimal: 0))"
+            self.bLabel.text = "\(b.simplify(decimal: 0))"
+            
+            let (c, m, y, k) = self.rgbToCmyk(r: r, g: g, b: b)
+            self.cLabel.text = "\(c.simplify(decimal: 3))"
+            self.mLabel.text = "\(m.simplify(decimal: 3))"
+            self.yLabel.text = "\(y.simplify(decimal: 3))"
+            self.kLabel.text = "\(k.simplify(decimal: 3))"
+            
+            let (h, s, l) = self.rgbToHsl(r: r, g: g, b: b)
+            self.hLabel.text = "\(h.simplify(decimal: 0))"
+            self.sLabel.text = "\((s * 100).simplify(decimal: 0))%"
+            self.lLabel.text = "\((l * 100).simplify(decimal: 0))%"
+            
+            self.hIndicatorLeft.constant = self.hView.frame.width * CGFloat(h) / 255 - 8
+            self.sIndicatorLeft.constant = self.sView.frame.width * CGFloat(s) / 1 - 8
+            self.lIndicatorLeft.constant = self.lView.frame.width * CGFloat(l) / 1 - 8
+        }
+    }
+
+    /**
+     Fetch current data or use last data if available
+     */
+    func fetchFirstData() {
+        if let lastSense = lastSense {
+            showColour(sense: lastSense)
+            activityIndicator.isHidden = true
+        } else {
+            http.getHistory(sensor: ColourSense.sensor, value: "\(ColourSense.values.r),\(ColourSense.values.g),\(ColourSense.values.b)", limit: 1, callback: { (error, senses) in
+                guard error == nil else {
+                    print("Cannot get current data from the server \(error!)")
+                    
+                    self.alert(title: "Failed to get colour data", message: "\(error!)")
+                    
+                    return
+                }
+                
+                if let sense = senses?[0] as? ColourSense {
+                    self.lastSense = sense
+                    
+                    DispatchQueue.main.async() {
+                        self.showColour(sense: sense)
+                        self.activityIndicator.isHidden = true
+                    }
+                }
+            })
+        }
     }
     
     override func didReceiveMemoryWarning() {

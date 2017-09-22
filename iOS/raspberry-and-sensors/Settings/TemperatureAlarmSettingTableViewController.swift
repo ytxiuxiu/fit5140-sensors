@@ -25,6 +25,7 @@ class TemperatureAlarmSettingTableViewController: UITableViewController {
     @IBOutlet weak var lowerThanUnitLabel: UILabel!
     
     
+    
     let setting = Setting.shared
     
     let alarm = Alarm.shared

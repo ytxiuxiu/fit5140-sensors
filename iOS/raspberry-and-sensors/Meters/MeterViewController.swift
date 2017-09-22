@@ -127,7 +127,7 @@ class MeterViewController: UIViewController {
         activityIndicator.isHidden = false
         
         initRing()
-        listenToSensors()
+        fetchFirstData()
         listenToSensors()
 
         super.viewWillAppear(animated)
@@ -174,6 +174,9 @@ class MeterViewController: UIViewController {
             http.getHistory(sensor: MeterSense.sensor, value: "\(MeterSense.values.thermometer),\(MeterSense.values.barometer),\(MeterSense.values.altimeter)", limit: 1, callback: { (error, senses) in
                 guard error == nil else {
                     print("Cannot get current data from the server \(error!)")
+                    
+                    self.alert(title: "Failed to get meter data", message: "\(error!)")
+                    
                     return
                 }
                 

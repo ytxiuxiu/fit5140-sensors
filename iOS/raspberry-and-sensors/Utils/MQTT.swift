@@ -11,6 +11,7 @@
 
 import UIKit
 import CocoaMQTT
+import Whisper
 
 
 /**
@@ -40,7 +41,7 @@ class MQTT: NSObject, CocoaMQTTDelegate {
     func connect() {
         let clientID = "MQTTClient-" + String(ProcessInfo().processIdentifier)
         //        self.client = CocoaMQTT(clientID: clientID, host: "192.168.43.154", port: 1883)
-        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.6", port: 1883)
+        self.client = CocoaMQTT(clientID: clientID, host: "192.168.0.102", port: 1883)
         
         self.client?.keepAlive = 60
         self.client?.delegate = self
@@ -81,10 +82,10 @@ class MQTT: NSObject, CocoaMQTTDelegate {
                         callback(meter)
                     }
                 } else if message.topic == MQTT.topicColour {
-                    // 65535 to 255
-                    let r = (info[ColourSense.values.r] as! Double) / 257
-                    let g = (info[ColourSense.values.g] as! Double) / 257
-                    let b = (info[ColourSense.values.b] as! Double) / 257
+                    // 65536 to 256
+                    let r = (info[ColourSense.values.r] as! Double) / 256
+                    let g = (info[ColourSense.values.g] as! Double) / 256
+                    let b = (info[ColourSense.values.b] as! Double) / 256
                     
                     let colour = ColourSense(r: r, g: g, b: b)
                     
@@ -120,10 +121,11 @@ class MQTT: NSObject, CocoaMQTTDelegate {
         
         if let error = err {
             print(error)
+            
+            let murmur = Murmur(title: "Lost connection with MQTT server")
+            Whisper.show(whistle: murmur, action: .show(5))
         }
         
-        // try to reconnect
-        connect()
     }
     
     /**

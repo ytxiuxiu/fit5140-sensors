@@ -75,9 +75,7 @@ class MeterHistoryViewController: UIViewController {
             guard error == nil else {
                 print("Failed to get pressure history \(error!)")
                 
-                let alert = UIAlertController(title: "Failed to get history data", message: "\(error!)", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                self.alert(title: "Failed to get history data", message: "\(error!)")
                 
                 let data = LineChartData()
                 self.chartView.data = data

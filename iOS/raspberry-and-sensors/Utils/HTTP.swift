@@ -25,7 +25,7 @@ class HTTP: NSObject {
     
     static let shared = HTTP()
 
-    static let baseUrl = "http://192.168.0.6/history/"
+    static let baseUrl = "http://192.168.0.102/history/"
 //    static let baseUrl = "http://192.168.43.154/history/"
     
     
@@ -48,31 +48,31 @@ class HTTP: NSObject {
             }
             
             do {
-                if sensor == "meters" {
-                    var senses = [MeterSense]()
-                    
-                    let result = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    
-                    let object = result as? NSDictionary
-                    
-                    if let object = object {
-                        if let error = object.object(forKey: "error") {
-                            let errorObject = error as? NSDictionary
-                            
-                            if let errorObject = errorObject {
-                                print(errorObject)
-                                if let message = errorObject.object(forKey: "message") as? String {
-                                    callback(HTTPError.ServerError(message), nil)
-                                } else {
-                                    callback(HTTPError.ServerError("Unknown reason"), nil)
-                                }
+                let result = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                
+                let object = result as? NSDictionary
+                
+                if let object = object {
+                    if let error = object.object(forKey: "error") {
+                        let errorObject = error as? NSDictionary
+                        
+                        if let errorObject = errorObject {
+                            print(errorObject)
+                            if let message = errorObject.object(forKey: "message") as? String {
+                                callback(HTTPError.ServerError(message), nil)
+                            } else {
+                                callback(HTTPError.ServerError("Unknown reason"), nil)
                             }
-                            return
                         }
-                        
-                        let array = object["senses"] as? NSArray
-                        
-                        if let array = array {
+                        return
+                    }
+                    
+                    let array = object["senses"] as? NSArray
+                
+                    if let array = array {
+                        if sensor == "meters" {
+                            var senses = [MeterSense]()
+
                             for data in (array as NSArray as! [NSDictionary]) {
                                 let sense = MeterSense()
                                 
@@ -88,19 +88,42 @@ class HTTP: NSObject {
                                 
                                 senses.append(sense)
                             }
-                        } else {
-                            callback(HTTPError.JSONError("Cannot be understood"), nil)
-                            return
+                            
+                            callback(nil, senses)
+                        } else if sensor == "colour" {
+                            var senses = [ColourSense]()
+                            
+                            for data in (array as NSArray as! [NSDictionary]) {
+                                let sense = ColourSense()
+                                
+                                if let r = data.object(forKey: ColourSense.values.r) {
+                                    sense.r = r as! Double / 256
+                                }
+                                if let g = data.object(forKey: ColourSense.values.g) {
+                                    sense.g = g as! Double / 256
+                                }
+                                if let b = data.object(forKey: ColourSense.values.b) {
+                                    sense.b = b as! Double / 256
+                                }
+                                
+                                senses.append(sense)
+                            }
+                            
+                            callback(nil, senses)
                         }
+                    } else {
+                        callback(HTTPError.JSONError("Data cannot be understood"), nil)
+                        return
                     }
+            
                     
-                    callback(nil, senses)
-                } else if sensor == "colour" {
-                    // TODO
+                } else {
+                    print("Unsupport data type: \(sensor)")
+                    callback(HTTPError.JSONError("Unsupport data type: \(sensor)"), nil)
                 }
                 
             } catch let error as NSError {
-                print("Cannot parse json of history data: \(error)")
+                print("Cannot parse history data: \(error)")
                 callback(error, nil)
             }
         }

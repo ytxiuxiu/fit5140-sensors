@@ -13,15 +13,21 @@ import UIKit
  One sense of colour
  */
 class ColourSense: NSObject {
+    
+    static let sensor = "colour"
 
     static let values = (r: "r", g: "g", b: "b")
     
-    var r: Double
+    var r: Double?
     
-    var g: Double
+    var g: Double?
     
-    var b: Double
+    var b: Double?
 
+    
+    override init() {
+        
+    }
     
     init(r: Double, g: Double, b: Double) {
         self.r = r
@@ -30,7 +36,7 @@ class ColourSense: NSObject {
     }
     
     override var description: String {
-        return "ColourSense [r=\(self.r), g=\(self.g), b=\(self.b)]"
+        return "ColourSense [r=\(self.r?.simplify() ?? ""), g=\(self.g?.simplify() ?? ""), b=\(self.b?.simplify() ?? "")]"
     }
     
 }
