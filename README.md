@@ -2,11 +2,11 @@
 iOS APP with Raspberry PI and Sensors
 
 ## Run
-1. Install Mosquitto MQTT Broker
+1. Install Mosquitto MQTT Broker on a Raspberry Pi
   
     https://mosquitto.org/
 
-2. Copy server folder to a Raspberry Pi
+2. Copy server folder to the Raspberry Pi
 3. Install server dependencies in the server folder
 
     ```
